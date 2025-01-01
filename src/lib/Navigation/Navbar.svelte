@@ -39,7 +39,7 @@
         </NavLi>
       {/each}
     </div>
-    <div class="flex items-center gap-2 border-l-2 border-gray-300 pl-4">
+    <div class="flex items-center gap-2 border-l-2 dark:border-gray-300 border-gray-500 pl-4">
       {#each globalLinks as link, i}
         <NavLi href={link.href} class="neo-brutalist-nav-item mx-1 {getColor(i + sectionLinks.length)}">
           {link.text}
