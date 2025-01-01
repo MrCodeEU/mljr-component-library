@@ -4,6 +4,9 @@ That allows me to keep components like e.g. Navbar, Footer, etc functionally and
 
 The components use flowbite-svelte as a base.
 
+TODO: Add Git workflow to build npm package and publisch on main push
+
+
 # Components 
 - [] Navbar
 - [] Footer

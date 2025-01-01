@@ -17,13 +17,11 @@
   }
 
   .neo-brutalist-nav-item {
-    @apply font-mono font-bold text-black dark:text-white 
-    bg-primary-300 dark:bg-primary-700
+    @apply font-mono font-bold text-black dark:text-black 
     border-2 border-black
     !px-4 !py-2
     shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
     hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none
-    hover:bg-black hover:text-primary-300 
     dark:hover:bg-white dark:hover:text-primary-700 
     transition-all !important;
   }

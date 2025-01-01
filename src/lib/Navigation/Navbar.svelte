@@ -3,24 +3,27 @@
   import { DarkMode } from 'flowbite-svelte';
 
   interface Props  {
-			logos: {
-				light: string;
-				dark: string;
-			};
-			globalLinks: Array<{ href: string; text: string }>;
-			sectionLinks: Array<{ href: string; text: string }>;
-		}
+    logos: {
+      light: string;
+      dark: string;
+    };
+    globalLinks: Array<{ href: string; text: string }>;
+    sectionLinks: Array<{ href: string; text: string }>;
+  }
 
-  const colors = [
-    'bg-red-200 hover:bg-red-300',
-    'bg-blue-200 hover:bg-blue-300',
-    'bg-green-200 hover:bg-green-300',
-    'bg-yellow-200 hover:bg-yellow-300',
-    'bg-purple-200 hover:bg-purple-300',
-    'bg-pink-200 hover:bg-pink-300'
+  const brutalistColors = [
+    { bg: 'bg-yellow-300', hover: 'hover:bg-yellow-400' },
+    { bg: 'bg-red-400', hover: 'hover:bg-red-500' },
+    { bg: 'bg-blue-400', hover: 'hover:bg-blue-500' },
+    { bg: 'bg-green-400', hover: 'hover:bg-green-500' },
+    { bg: 'bg-pink-400', hover: 'hover:bg-pink-500' },
+    { bg: 'bg-orange-400', hover: 'hover:bg-orange-500' },
   ];
 
-  const getColor = (index: number) => colors[index % colors.length];
+  const getColor = (index: number) => {
+    const colorSet = brutalistColors[index % brutalistColors.length];
+    return `${colorSet.bg} ${colorSet.hover}`;
+  };
 
   let { logos, globalLinks, sectionLinks } = $props();
 </script>
