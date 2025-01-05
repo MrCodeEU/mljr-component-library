@@ -3,13 +3,17 @@
 	import Logo_h from '$lib/images/Logo_h.png';
 	import Logo_h_w from '$lib/images/Logo_h_w.png';
 	import Logo_h_b from '$lib/images/Logo_h_b.png';
-    import Card from '$lib/UI/Card.svelte';
+    import { Card } from 'flowbite-svelte';
     import Button from '$lib/UI/Button.svelte';
     import { brutalistColors, getColor } from '$lib/utils/colors';
     import Footer from '$lib/Navigation/Footer.svelte';
     import { HomeOutline, MailBoxOutline, PhoneOutline, TwitterSolid, FacebookSolid, GithubSolid, SunSolid, MoonSolid } from 'flowbite-svelte-icons';
     import Toggle from '$lib/UI/Toggle.svelte';
-
+	import * as m from '$lib/paraglide/messages.js'
+    import ProgressBar from '$lib/UI/ProgressBar.svelte';
+    import { onMount } from 'svelte';
+    import ImageSlider from '$lib/UI/ImageSlider.svelte';
+    
 	let navbarProps = {
 		logos: {
 			light: Logo_h_b,
@@ -88,21 +92,81 @@
         }
     ];
 
-    let toggleState = false;
-    let toggleState2 = true;
+    const demoImages = [
+        { 
+            url: 'https://via.placeholder.com/800x400/FF5733/FFFFFF?text=Image+1', 
+            alt: 'Demo Image 1' 
+        },
+        { 
+            url: 'https://via.placeholder.com/800x400/33FF57/FFFFFF?text=Image+2', 
+            alt: 'Demo Image 2' 
+        },
+        { 
+            url: 'https://via.placeholder.com/800x400/5733FF/FFFFFF?text=Image+3', 
+            alt: 'Demo Image 3' 
+        },
+    ];
+
+    let animatedProgress = $state(0);
+    let toggleState = $state(false);
+    let toggleState2 = $state(true);
+    let themeToggle = $state(false);
+    let petToggle = $state(false);
+    let simpleToggle = $state(false);
+    let statusToggle = $state(false);
+    
+    $effect(() => {
+        const interval = setInterval(() => {
+            animatedProgress = (animatedProgress + 1) % 101;
+        }, 100);
+
+        return () => clearInterval(interval);
+    });
+
+    function handleThemeToggle(checked: boolean) {
+        themeToggle = checked;
+    }
+
+    function handlePetToggle(checked: boolean) {
+        petToggle = checked;
+    }
+
+    function handleSimpleToggle(checked: boolean) {
+        simpleToggle = checked;
+    }
+
+    function handleStatusToggle(checked: boolean) {
+        statusToggle = checked;
+    }
+
+    function toggleLanguage() {
+        setLanguage(m.language() === 'en' ? 'de' : 'en');
+    }
 </script>
 
-<Navbar {...navbarProps}/>
+<Navbar {...navbarProps}>
+    <svelte:fragment slot="extra">
+        <Toggle 
+            size="md" 
+            colorIndex={4}
+            checked={m.language() === 'de'}
+            onChange={toggleLanguage}
+        >
+            <svelte:fragment slot="left">EN</svelte:fragment>
+            <svelte:fragment slot="right">DE</svelte:fragment>
+        </Toggle>
+    </svelte:fragment>
+</Navbar>
 
 <div class="container mx-auto p-8">
     <!-- Color Showcase -->
     <div class="mb-8 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-        <h2 class="text-2xl font-bold mb-4 dark:text-white">Color Palette</h2>
+        <h2 class="text-2xl font-bold mb-4 dark:text-white">{m.color_palette()}</h2>
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
             {#each brutalistColors as color, i}
                 <div class="flex flex-col gap-2">
                     <div class={`h-24 neo-brutalist-button ${getColor(i)}`}>
-                        <div class="p-2 font-mono text-sm">Color {i + 1}</div>
+                        <div class="p-2 font-mono text-sm">{m.color_number({ number: i + 1 })}</div>
                     </div>
                     <div class={`h-12 neo-brutalist-button ${getColor(i)}`}>
                         <div class="p-2 font-mono text-sm">Hover</div>
@@ -114,16 +178,16 @@
 
     <!-- Button Showcase -->
     <div class="mb-8 p-4 bg-gray-100 rounded-lg">
-        <h2 class="text-2xl font-bold mb-4">Button Variants</h2>
+        <h2 class="text-2xl font-bold mb-4">{m.button_variants()}</h2>
         <div class="flex flex-wrap gap-4">
-            <Button>Default</Button>
-            <Button variant="outline">Outline</Button>
-            <Button variant="text">Text</Button>
-            <Button rounded>Rounded</Button>
-            <Button size="sm">Small</Button>
-            <Button size="lg">Large</Button>
-            <Button colorIndex={1}>Colored</Button>
-            <Button disabled>Disabled</Button>
+            <Button>{m.button_default()}</Button>
+            <Button variant="outline">{m.button_outline()}</Button>
+            <Button variant="text">{m.button_text()}</Button>
+            <Button rounded>{m.button_rounded()}</Button>
+            <Button size="sm">{m.button_small()}</Button>
+            <Button size="lg">{m.button_large()}</Button>
+            <Button colorIndex={1}>{m.button_colored()}</Button>
+            <Button disabled>{m.button_disabled()}</Button>
         </div>
     </div>
 
@@ -131,7 +195,13 @@
     <div class="mb-8 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
         <h2 class="text-2xl font-bold mb-4 dark:text-white">Toggle Variants</h2>
         <div class="flex flex-col gap-4">
-            <Toggle label="Theme Toggle" size="lg" colorIndex={2}>
+            <Toggle 
+                label="Theme Toggle" 
+                size="lg" 
+                colorIndex={2}
+                checked={themeToggle}
+                onChange={handleThemeToggle}
+            >
                 <svelte:fragment slot="left">
                     <SunSolid class="w-8 h-8" />
                 </svelte:fragment>
@@ -139,7 +209,13 @@
                     <MoonSolid class="w-8 h-8" />
                 </svelte:fragment>
             </Toggle>
-            <Toggle label="Pet Choice" size="md" colorIndex={3}>
+            <Toggle 
+                label="Pet Choice" 
+                size="md" 
+                colorIndex={3}
+                checked={petToggle}
+                onChange={handlePetToggle}
+            >
                 <svelte:fragment slot="left">
                     <img src="https://placekitten.com/32/32" alt="cat" class="rounded-full" />
                 </svelte:fragment>
@@ -147,8 +223,22 @@
                     <span class="text-2xl">🐶</span>
                 </svelte:fragment>
             </Toggle>
-            <Toggle label="Simple Text" size="md" leftText="OFF" rightText="ON" colorIndex={1} />
-            <Toggle label="Status" size="lg" colorIndex={0}>
+            <Toggle 
+                label="Simple Text" 
+                size="md" 
+                leftText="OFF" 
+                rightText="ON" 
+                colorIndex={1}
+                checked={simpleToggle}
+                onChange={handleSimpleToggle}
+            />
+            <Toggle 
+                label="Status" 
+                size="lg" 
+                colorIndex={0}
+                checked={statusToggle}
+                onChange={handleStatusToggle}
+            >
                 <svelte:fragment slot="left">
                     <span class="text-xl">❌</span>
                 </svelte:fragment>
@@ -159,38 +249,85 @@
         </div>
     </div>
 
+    <!-- Progress Bar Showcase -->
+    <div class="mb-8 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+        <h2 class="text-2xl font-bold mb-4 dark:text-white">Progress Bar Variants</h2>
+        <div class="flex flex-col gap-6">
+            <!-- Basic Progress Bars -->
+            <div class="space-y-4">
+                <ProgressBar progress={75} colorIndex={0} size="sm" />
+                <ProgressBar progress={60} colorIndex={1} size="md" />
+                <ProgressBar progress={45} colorIndex={2} size="lg" />
+                <ProgressBar progress={30} colorIndex={3} size="xl" />
+            </div>
+
+            <!-- Progress Bars with Labels -->
+            <div class="space-y-4">
+                <ProgressBar progress={80} colorIndex={4} size="md" showLabel />
+                <ProgressBar progress={65} colorIndex={5} size="lg" label="Loading..." showLabel />
+            </div>
+
+            <!-- Animated Progress Bar -->
+            <div>
+                <ProgressBar 
+                    progress={animatedProgress}
+                    colorIndex={2}
+                    size="md"
+                    showLabel
+                    animate
+                    duration={200}
+                />
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Slider Showcase -->
+    <div class="mb-8 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+        <h2 class="text-2xl font-bold mb-4 dark:text-white">Image Slider</h2>
+        <div class="space-y-8">
+            <ImageSlider 
+                images={demoImages}
+                autoplay={true}
+                interval={5000}
+                colorIndex={2}
+                transitionEffect="fade"
+                showPagination={true}
+            />
+            
+            <ImageSlider 
+                images={demoImages}
+                droneMode={false}
+                colorIndex={4}
+                transitionEffect="slide"
+                showPagination={true}
+                showControls={false}
+            />
+        </div>
+    </div>
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Basic Card -->
-        <Card heading="Simple Card" colorIndex={0}>
-            {#snippet children()}
-                <p>This is a basic card with just a heading and content.</p>
-            {/snippet}
+        <Card class="neo-brutalist-card {getColor(0)}">
+            <h5 class="mb-2 text-2xl font-bold text-black dark:text-white">{m.card_simple_title()}</h5>
+            <p class="font-normal text-black dark:text-white">{m.card_simple_content()}</p>
         </Card>
 
         <!-- Card with Image -->
-        <Card 
-            heading="Card with Image" 
-            subheading="And buttons!"
-            image={{ src: "https://placekitten.com/400/300", alt: "A cute kitten" }}
-            colorIndex={1}
-        >
-            {#snippet children()}
-                <p>This card demonstrates image usage and buttons.</p>
-            {/snippet}
-            {#snippet buttons()}
+        <Card class="neo-brutalist-card {getColor(1)}" img="https://via.assets.so/img.jpg?w=400&h=150&tc=blue&bg=#cecece">
+            <h5 class="mb-2 text-2xl font-bold text-black dark:text-white">{m.card_image_title()}</h5>
+            <p class="mb-3 font-normal text-black dark:text-white">{m.card_image_content()}</p>
+            <div class="flex gap-2">
                 <Button colorIndex={2}>Click Me</Button>
                 <Button variant="outline">Cancel</Button>
-            {/snippet}
+            </div>
         </Card>
 
         <!-- Content-only Card -->
-        <Card colorIndex={2}>
-            {#snippet children()}
-                <p>This card only has content, no heading or image.</p>
-            {/snippet}
-            {#snippet buttons()}
+        <Card class="neo-brutalist-card {getColor(3)}">
+            <p class="font-normal text-black dark:text-white">This card only has content, no heading or image.</p>
+            <div class="mt-4">
                 <Button rounded>OK</Button>
-            {/snippet}
+            </div>
         </Card>
     </div>
 

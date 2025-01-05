@@ -2,6 +2,8 @@
   import { Navbar, NavBrand, NavHamburger, NavUl } from 'flowbite-svelte';
   import { DarkMode } from 'flowbite-svelte';
   import Button from '$lib/UI/Button.svelte';
+  import LanguageToggle from '$lib/UI/Language_Toggle.svelte';
+
 
   interface Props  {
     logos: {
@@ -45,6 +47,7 @@
           </div>
         </NavUl>
         <div class="flex gap-4">
+          <LanguageToggle />
           <DarkMode class="neo-brutalist-button p-2 text-lg" />
           <NavHamburger class="neo-brutalist-button p-2 text-lg" />
         </div>

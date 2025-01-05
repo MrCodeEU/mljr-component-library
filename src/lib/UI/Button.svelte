@@ -8,16 +8,16 @@
         colorIndex?: number;
         type?: 'button' | 'submit' | 'reset';
         disabled?: boolean;
-        children?: () => any;
-        onClick?: (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
+        onclick?: (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
     }
-    let { 
-        variant = 'default',
+    const { 
         size = 'md',
-        rounded = false,
         colorIndex = 0,
+        rounded = false,
+        variant = 'default',
         disabled = false,
-        children
+        onclick,
+        ...props
     } = $props();
 
     const sizeClasses = $derived({
@@ -32,10 +32,18 @@
         getColor(colorIndex, variant),
         disabled ? 'opacity-50 cursor-not-allowed' : ''
     ].join(' '));
+
+    function handleClick(event: MouseEvent) {
+        if (onclick) {
+            onclick(event);
+        }
+    }
 </script>
 
 <button
     class="neo-brutalist-button {buttonClasses}"
-    {disabled} >
-    {@render children?.()}
+    onclick={handleClick}
+    {...props}
+>
+    <slot />
 </button>

@@ -12,7 +12,7 @@ TODO: Add Git workflow to build npm package and publisch on main push
 - [x] Footer
 - [ ] Login / Register
 - [ ] Login / Register Modals
-- [ ] Language Toggle (Using Paraglide)
+- [x] Language Toggle (Using Paraglide)
 - [ ] ...
 
 # Elements

@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { Snippet } from 'svelte';
-    import Card from '$lib/UI/Card.svelte';
+    import { Card } from 'flowbite-svelte';
+    import { getColor } from '$lib/utils/colors';
 
     interface FooterLink {
         text: string;
@@ -22,15 +23,13 @@
 <footer class="neo-brutalist-footer w-full p-8 mt-8">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
         {#each sections as section, i}
-            <Card 
-                heading={section.title}
-                colorIndex={(colorIndex + i) % 6}
-            >
+            <Card class="neo-brutalist-card {getColor((colorIndex + i) % 6)}">
+                <h5 class="mb-2 text-xl font-bold text-black dark:text-white">{section.title}</h5>
                 <div class="flex flex-col gap-2">
                     {#each section.links as link}
                         <a 
                             href={link.href}
-                            class="flex items-center gap-2 hover:translate-x-1 transition-transform"
+                            class="flex items-center gap-2 hover:translate-x-1 transition-transform text-black dark:text-white"
                         >
                             {#if link.icon}
                                 {@render link.icon()}

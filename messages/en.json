@@ -1,4 +1,24 @@
 {
-	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"hello_world": "Hello, {name} from en!"
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+    "hello_world": "Hello, {name} from en!",
+    "color_palette": "Color Palette",
+    "color_number": "Color {number}",
+    "button_variants": "Button Variants",
+    "button_default": "Default",
+    "button_outline": "Outline",
+    "button_text": "Text",
+    "button_rounded": "Rounded",
+    "button_small": "Small",
+    "button_large": "Large",
+    "button_colored": "Colored",
+    "button_disabled": "Disabled",
+    "toggle_variants": "Toggle Variants",
+    "toggle_theme": "Theme Toggle",
+    "toggle_pet": "Pet Choice",
+    "toggle_simple": "Simple Text",
+    "toggle_status": "Status",
+    "card_simple_title": "Simple Card",
+    "card_simple_content": "This is a basic card with just a heading and content.",
+    "card_image_title": "Card with Image",
+    "card_image_content": "This card demonstrates image usage and buttons."
 }

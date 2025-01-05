@@ -24,9 +24,9 @@
   }
 
   .neo-brutalist-card {
-    @apply border-4 border-black 
-    shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]
-    hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
+    @apply !border-4 !border-black 
+    !shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]
+    hover:!shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
     transition-all;
   }
 
@@ -48,6 +48,14 @@
     @apply absolute left-0.5 top-1/2 -translate-y-1/2
     bg-white border-2 border-black rounded-full
     shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]
+    transition-all duration-200 ease-in-out;
+  }
+
+  .neo-brutalist-progress {
+    @apply p-0.5 bg-transparent border-2 border-black 
+    shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
+    hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
+    overflow-hidden
     transition-all duration-200 ease-in-out;
   }
 }

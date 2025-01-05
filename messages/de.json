@@ -1,4 +1,24 @@
 {
-	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"hello_world": "Hello, {name} from de!"
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+    "hello_world": "Hallo, {name} from de!",
+    "color_palette": "Farbpalette",
+    "color_number": "Farbe {number}",
+    "button_variants": "Button-Varianten",
+    "button_default": "Standard",
+    "button_outline": "Kontur",
+    "button_text": "Text",
+    "button_rounded": "Abgerundet",
+    "button_small": "Klein",
+    "button_large": "Groß",
+    "button_colored": "Farbig",
+    "button_disabled": "Deaktiviert",
+    "toggle_variants": "Toggle-Varianten",
+    "toggle_theme": "Theme-Umschaltung",
+    "toggle_pet": "Haustier-Auswahl",
+    "toggle_simple": "Einfacher Text",
+    "toggle_status": "Status",
+    "card_simple_title": "Einfache Karte",
+    "card_simple_content": "Dies ist eine einfache Karte mit nur einer Überschrift und Inhalt.",
+    "card_image_title": "Karte mit Bild",
+    "card_image_content": "Diese Karte demonstriert die Verwendung von Bildern und Buttons."
 }

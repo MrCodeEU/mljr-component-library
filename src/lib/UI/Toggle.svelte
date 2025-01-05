@@ -9,6 +9,7 @@
     export let label = '';
     export let leftText = '';
     export let rightText = '';
+    export let onChange: ((checked: boolean) => void) | undefined = undefined;
 
     const sizeClasses = {
         sm: 'w-12 h-6',
@@ -28,7 +29,12 @@
         lg: 'text-base w-8 h-8'
     };
 
-    $: colorClass = getColor(colorIndex);
+    function handleChange(event: Event) {
+        const target = event.target as HTMLInputElement;
+        checked = target.checked;
+        onChange?.(checked);
+        console.log('🔧 Toggle internal:', checked);
+    }
 </script>
 
 <label class="flex items-center gap-2 cursor-pointer {disabled ? 'opacity-50 cursor-not-allowed' : ''}">
@@ -41,10 +47,11 @@
             type="checkbox"
             class="sr-only"
             {name}
-            bind:checked
+            {checked}
             {disabled}
+            on:change={handleChange}
         />
-        <div class={`neo-brutalist-toggle ${sizeClasses[size]} ${checked ? colorClass : 'bg-gray-200 dark:bg-gray-700'}`}>
+        <div class={`neo-brutalist-toggle ${sizeClasses[size]} ${checked ? getColor(colorIndex) : 'bg-gray-200 dark:bg-gray-700'}`}>
             <!-- Left content container -->
             <div class={`absolute right-1 top-1/2 -translate-y-1/2 flex items-center justify-center ${contentSizes[size]} ${!checked ? 'opacity-100 scale-100' : 'opacity-0 scale-75'} transition-all`}>
                 <slot name="left">
