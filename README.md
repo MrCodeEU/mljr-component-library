@@ -8,15 +8,17 @@ TODO: Add Git workflow to build npm package and publisch on main push
 
 
 # Components 
-- [] Navbar
-- [] Footer
-- [] Login / Register
-- [] Login / Register Modals?
-- [] ...
+- [x] Navbar
+- [x] Footer
+- [ ] Login / Register
+- [ ] Login / Register Modals
+- [ ] Language Toggle (Using Paraglide)
+- [ ] ...
 
 # Elements
-- [] Cards
-- [] Buttons
+- [x] Cards
+- [x] Buttons
+- [x] Toggle
 - [] Form Elements (Inputs, Files Uploads, Date Pickers etc)
 - [] Avatars
 - [] Image Carousel
