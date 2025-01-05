@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { Navbar, NavBrand, NavHamburger, NavUl, NavLi } from 'flowbite-svelte';
+  import { Navbar, NavBrand, NavHamburger, NavUl } from 'flowbite-svelte';
   import { DarkMode } from 'flowbite-svelte';
+  import { getColor } from '$lib/utils/colors';
+  import Button from '$lib/UI/Button.svelte';
 
   interface Props  {
     logos: {
@@ -10,20 +12,6 @@
     globalLinks: Array<{ href: string; text: string }>;
     sectionLinks: Array<{ href: string; text: string }>;
   }
-
-  const brutalistColors = [
-    { bg: 'bg-yellow-300', hover: 'hover:bg-yellow-400' },
-    { bg: 'bg-red-400', hover: 'hover:bg-red-500' },
-    { bg: 'bg-blue-400', hover: 'hover:bg-blue-500' },
-    { bg: 'bg-green-400', hover: 'hover:bg-green-500' },
-    { bg: 'bg-pink-400', hover: 'hover:bg-pink-500' },
-    { bg: 'bg-orange-400', hover: 'hover:bg-orange-500' },
-  ];
-
-  const getColor = (index: number) => {
-    const colorSet = brutalistColors[index % brutalistColors.length];
-    return `${colorSet.bg} ${colorSet.hover}`;
-  };
 
   let { logos, globalLinks, sectionLinks } = $props();
 </script>
@@ -37,16 +25,20 @@
   <NavUl class="h-full flex gap-4">
     <div class="flex items-center gap-2">
       {#each sectionLinks as link, i}
-        <NavLi href={link.href} class="neo-brutalist-nav-item mx-1 {getColor(i)}">
-          {link.text}
-        </NavLi>
+        <a href={link.href}>
+          <Button colorIndex={i}>
+            {link.text}
+          </Button>
+        </a>
       {/each}
     </div>
     <div class="flex items-center gap-2 border-l-2 dark:border-gray-300 border-gray-500 pl-4">
       {#each globalLinks as link, i}
-        <NavLi href={link.href} class="neo-brutalist-nav-item mx-1 {getColor(i + sectionLinks.length)}">
-          {link.text}
-        </NavLi>
+        <a href={link.href}>
+          <Button colorIndex={i + sectionLinks.length}>
+            {link.text}
+          </Button>
+        </a>
       {/each}
     </div>
   </NavUl>

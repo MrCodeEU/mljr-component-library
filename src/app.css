@@ -4,26 +4,15 @@
 
 @layer components {
   .neo-brutalist-container {
-    @apply bg-primary-300 dark:bg-primary-700 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition-all !important;
+    @apply bg-yellow-300 dark:bg-purple-800 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition-all !important;
   }
 
   .neo-brutalist-button {
-    @apply border-2 border-black p-5 
+    @apply border-2 border-black
+    font-mono font-bold
     shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
     hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none
-    hover:!bg-black hover:text-primary-300 
-    dark:hover:!bg-white dark:hover:text-primary-700 
     transition-all;
-  }
-
-  .neo-brutalist-nav-item {
-    @apply font-mono font-bold text-black dark:text-black 
-    border-2 border-black
-    !px-4 !py-2
-    shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
-    hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none
-    dark:hover:bg-white dark:hover:text-primary-700 
-    transition-all !important;
   }
 
   .neo-brutalist-brand {
@@ -31,6 +20,13 @@
   }
 
   .neo-brutalist-navbar {
-    @apply bg-primary-300 dark:bg-primary-700 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] !important;
+    @apply bg-yellow-300 dark:bg-purple-800 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] !important;
+  }
+
+  .neo-brutalist-card {
+    @apply border-4 border-black 
+    shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]
+    hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
+    transition-all;
   }
 }
