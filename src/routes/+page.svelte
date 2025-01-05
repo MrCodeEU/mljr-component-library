@@ -7,7 +7,8 @@
     import Button from '$lib/UI/Button.svelte';
     import { brutalistColors, getColor } from '$lib/utils/colors';
     import Footer from '$lib/Navigation/Footer.svelte';
-    import { HomeOutline, MailBoxOutline, PhoneOutline, TwitterSolid, FacebookSolid, GithubSolid } from 'flowbite-svelte-icons';
+    import { HomeOutline, MailBoxOutline, PhoneOutline, TwitterSolid, FacebookSolid, GithubSolid, SunSolid, MoonSolid } from 'flowbite-svelte-icons';
+    import Toggle from '$lib/UI/Toggle.svelte';
 
 	let navbarProps = {
 		logos: {
@@ -86,6 +87,9 @@
             ]
         }
     ];
+
+    let toggleState = false;
+    let toggleState2 = true;
 </script>
 
 <Navbar {...navbarProps}/>
@@ -120,6 +124,38 @@
             <Button size="lg">Large</Button>
             <Button colorIndex={1}>Colored</Button>
             <Button disabled>Disabled</Button>
+        </div>
+    </div>
+
+    <!-- Toggle Showcase -->
+    <div class="mb-8 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+        <h2 class="text-2xl font-bold mb-4 dark:text-white">Toggle Variants</h2>
+        <div class="flex flex-col gap-4">
+            <Toggle label="Theme Toggle" size="lg" colorIndex={2}>
+                <svelte:fragment slot="left">
+                    <SunSolid class="w-8 h-8" />
+                </svelte:fragment>
+                <svelte:fragment slot="right">
+                    <MoonSolid class="w-8 h-8" />
+                </svelte:fragment>
+            </Toggle>
+            <Toggle label="Pet Choice" size="md" colorIndex={3}>
+                <svelte:fragment slot="left">
+                    <img src="https://placekitten.com/32/32" alt="cat" class="rounded-full" />
+                </svelte:fragment>
+                <svelte:fragment slot="right">
+                    <span class="text-2xl">🐶</span>
+                </svelte:fragment>
+            </Toggle>
+            <Toggle label="Simple Text" size="md" leftText="OFF" rightText="ON" colorIndex={1} />
+            <Toggle label="Status" size="lg" colorIndex={0}>
+                <svelte:fragment slot="left">
+                    <span class="text-xl">❌</span>
+                </svelte:fragment>
+                <svelte:fragment slot="right">
+                    <span class="text-xl">✅</span>
+                </svelte:fragment>
+            </Toggle>
         </div>
     </div>
 

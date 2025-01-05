@@ -36,4 +36,18 @@
     shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]
     transition-all;
   }
+
+  .neo-brutalist-toggle {
+    @apply relative inline-flex items-center rounded-full
+    border-2 border-black
+    shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
+    transition-all duration-200 ease-in-out;
+  }
+
+  .neo-brutalist-toggle-knob {
+    @apply absolute left-0.5 top-1/2 -translate-y-1/2
+    bg-white border-2 border-black rounded-full
+    shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]
+    transition-all duration-200 ease-in-out;
+  }
 }
