@@ -29,4 +29,11 @@
     hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
     transition-all;
   }
+
+  .neo-brutalist-footer {
+    @apply bg-yellow-300 dark:bg-purple-800 
+    border-4 border-black 
+    shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]
+    transition-all;
+  }
 }

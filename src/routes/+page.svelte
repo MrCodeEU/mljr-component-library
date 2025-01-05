@@ -6,6 +6,8 @@
     import Card from '$lib/UI/Card.svelte';
     import Button from '$lib/UI/Button.svelte';
     import { brutalistColors, getColor } from '$lib/utils/colors';
+    import Footer from '$lib/Navigation/Footer.svelte';
+    import { HomeOutline, MailBoxOutline, PhoneOutline, TwitterSolid, FacebookSolid, GithubSolid } from 'flowbite-svelte-icons';
 
 	let navbarProps = {
 		logos: {
@@ -22,6 +24,68 @@
 		]
 	};
 
+    const footerSections = [
+        {
+            title: 'Contact',
+            links: [
+                { 
+                    text: 'Home', 
+                    href: '/',
+                    icon: () => ({
+                        h: () => HomeOutline
+                    })
+                },
+                { 
+                    text: 'Email Us', 
+                    href: 'mailto:example@example.com',
+                    icon: () => ({
+                        h: () => MailBoxOutline
+                    })
+                },
+                { 
+                    text: 'Call Us', 
+                    href: 'tel:+1234567890',
+                    icon: () => ({
+                        h: () => PhoneOutline
+                    })
+                }
+            ]
+        },
+        {
+            title: 'Social',
+            links: [
+                { 
+                    text: 'Twitter', 
+                    href: 'https://twitter.com',
+                    icon: () => ({
+                        h: () => TwitterSolid
+                    })
+                },
+                { 
+                    text: 'Facebook', 
+                    href: 'https://facebook.com',
+                    icon: () => ({
+                        h: () => FacebookSolid
+                    })
+                },
+                { 
+                    text: 'Github', 
+                    href: 'https://github.com',
+                    icon: () => ({
+                        h: () => GithubSolid
+                    })
+                }
+            ]
+        },
+        {
+            title: 'Legal',
+            links: [
+                { text: 'Privacy Policy', href: '/privacy' },
+                { text: 'Terms of Service', href: '/terms' },
+                { text: 'Cookie Policy', href: '/cookies' }
+            ]
+        }
+    ];
 </script>
 
 <Navbar {...navbarProps}/>
@@ -62,7 +126,9 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Basic Card -->
         <Card heading="Simple Card" colorIndex={0}>
-            <p>This is a basic card with just a heading and content.</p>
+            {#snippet children()}
+                <p>This is a basic card with just a heading and content.</p>
+            {/snippet}
         </Card>
 
         <!-- Card with Image -->
@@ -72,19 +138,29 @@
             image={{ src: "https://placekitten.com/400/300", alt: "A cute kitten" }}
             colorIndex={1}
         >
-            <p>This card demonstrates image usage and buttons.</p>
-            <svelte:fragment slot="buttons">
+            {#snippet children()}
+                <p>This card demonstrates image usage and buttons.</p>
+            {/snippet}
+            {#snippet buttons()}
                 <Button colorIndex={2}>Click Me</Button>
                 <Button variant="outline">Cancel</Button>
-            </svelte:fragment>
+            {/snippet}
         </Card>
 
         <!-- Content-only Card -->
         <Card colorIndex={2}>
-            <p>This card only has content, no heading or image.</p>
-            <svelte:fragment slot="buttons">
+            {#snippet children()}
+                <p>This card only has content, no heading or image.</p>
+            {/snippet}
+            {#snippet buttons()}
                 <Button rounded>OK</Button>
-            </svelte:fragment>
+            {/snippet}
         </Card>
+    </div>
+
+    <!-- Footer Showcase -->
+    <div class="mt-16">
+        <h2 class="text-2xl font-bold mb-4 dark:text-white">Footer Component</h2>
+        <Footer sections={footerSections} colorIndex={0} />
     </div>
 </div>

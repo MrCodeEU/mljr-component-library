@@ -8,15 +8,16 @@
         colorIndex?: number;
         type?: 'button' | 'submit' | 'reset';
         disabled?: boolean;
+        children?: () => any;
+        onClick?: (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
     }
-
     let { 
         variant = 'default',
         size = 'md',
         rounded = false,
         colorIndex = 0,
-        type = 'button',
-        disabled = false
+        disabled = false,
+        children
     } = $props();
 
     const sizeClasses = $derived({
@@ -25,8 +26,7 @@
         lg: 'px-6 py-3 text-lg'
     }[size]);
 
-    const classes = $derived([
-        'neo-brutalist-button',
+    const buttonClasses = $derived([
         sizeClasses,
         rounded ? 'rounded-md' : '',
         getColor(colorIndex, variant),
@@ -35,10 +35,7 @@
 </script>
 
 <button
-    {type}
-    {disabled}
-    class={classes}
-    on:click
->
-    <slot />
+    class="neo-brutalist-button {buttonClasses}"
+    {disabled} >
+    {@render children?.()}
 </button>
