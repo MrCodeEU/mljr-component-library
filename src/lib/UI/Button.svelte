@@ -29,8 +29,7 @@
         'neo-brutalist-button',
         sizeClasses,
         rounded ? 'rounded-md' : '',
-        variant === 'outline' ? 'bg-transparent border-current hover:bg-transparent' : getColor(colorIndex),
-        variant === 'text' ? 'border-0 shadow-none hover:shadow-none' : '',
+        getColor(colorIndex, variant),
         disabled ? 'opacity-50 cursor-not-allowed' : ''
     ].join(' '));
 </script>

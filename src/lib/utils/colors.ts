@@ -26,40 +26,16 @@ const colorMap = {
     'black': '#000000',
 } as const;
 
-function getLuminance(hexColor: string): number {
-    // Remove # if present
-    hexColor = hexColor.replace('#', '');
-    const r = parseInt(hexColor.substr(0, 2), 16) / 255;
-    const g = parseInt(hexColor.substr(2, 2), 16) / 255;
-    const b = parseInt(hexColor.substr(4, 2), 16) / 255;
-    
-    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+function isDarkMode(): boolean {
+    if (typeof document === 'undefined') return false;
+    return document.documentElement.classList.contains('dark');
 }
 
-function getContrastRatio(color1: string, color2: string): number {
-    const l1 = getLuminance(color1);
-    const l2 = getLuminance(color2);
-    const brightest = Math.max(l1, l2);
-    const darkest = Math.min(l1, l2);
-    return (brightest + 0.05) / (darkest + 0.05);
+function getContrastTextColor(): string {
+    return isDarkMode() ? 'text-white' : 'text-black';
 }
 
-function getContrastTextColor(bgColorClass: string): string {
-    try {
-        const colorKey = bgColorClass.split('-').slice(-2).join('-') as keyof typeof colorMap;
-        const bgColor = colorMap[colorKey];
-        if (!bgColor) return 'text-black';
-        
-        const whiteContrast = getContrastRatio(bgColor, colorMap['white']);
-        const blackContrast = getContrastRatio(bgColor, colorMap['black']);
-        
-        return blackContrast > whiteContrast ? 'text-black' : 'text-white';
-    } catch {
-        return 'text-black';
-    }
-}
-
-export const getColor = (index: number = 0) => {
+export const getColor = (index: number = 0, variant: 'default' | 'outline' | 'text' = 'default') => {
     try {
         const colorSet = brutalistColors[index % brutalistColors.length];
         const bgParts = colorSet.bg.split(' ');
@@ -70,20 +46,37 @@ export const getColor = (index: number = 0) => {
         const hoverColor = hoverParts[0].replace('hover:', '');
         const darkHoverColor = hoverParts[1]?.replace('dark:hover:', '') || hoverColor;
 
-        const textColor = getContrastTextColor(bgColor);
-        const darkTextColor = getContrastTextColor(darkBgColor);
-        const hoverTextColor = getContrastTextColor(hoverColor);
-        const darkHoverTextColor = getContrastTextColor(darkHoverColor);
+        if (variant === 'text') {
+            return [
+                bgColor.replace('bg-', 'text-'),
+                `dark:${darkBgColor.replace('bg-', 'text-')}`,
+                `hover:${hoverColor.replace('bg-', 'text-')}`,
+                `dark:hover:${darkHoverColor.replace('bg-', 'text-')}`
+            ].join(' ');
+        }
+
+        if (variant === 'outline') {
+            return [
+                'bg-transparent',
+                'hover:bg-transparent',
+                bgColor.replace('bg-', 'text-'),
+                `dark:${darkBgColor.replace('bg-', 'text-')}`,
+                `hover:${hoverColor.replace('bg-', 'text-')}`,
+                `dark:hover:${darkHoverColor.replace('bg-', 'text-')}`,
+                bgColor.replace('bg-', 'border-'),
+                `dark:${darkBgColor.replace('bg-', 'border-')}`
+            ].join(' ');
+        }
 
         return [
             colorSet.bg,
             colorSet.hover,
-            textColor,
-            `dark:${darkTextColor}`,
-            `hover:${hoverTextColor}`,
-            `dark:hover:${darkHoverTextColor}`
+            'text-black',
+            'dark:text-white',
+            'hover:text-black',
+            'dark:hover:text-white'
         ].join(' ');
     } catch {
-        return 'bg-gray-200 hover:bg-gray-300 text-black';
+        return 'bg-gray-200 hover:bg-gray-300 text-black dark:text-white';
     }
 }

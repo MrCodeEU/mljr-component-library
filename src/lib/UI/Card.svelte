@@ -20,12 +20,12 @@
     {/if}
     <div class="p-4 flex flex-col gap-4">
         {#if heading}
-            <h3 class="text-xl font-bold font-mono dark:text-white">{heading}</h3>
+            <h3 class="text-xl font-bold font-mono">{heading}</h3>
         {/if}
         {#if subheading}
-            <h4 class="text-lg font-mono dark:text-gray-200">{subheading}</h4>
+            <h4 class="text-lg font-mono">{subheading}</h4>
         {/if}
-        <div class="content dark:text-gray-300">
+        <div class="content">
             <slot />
         </div>
         <div class="buttons flex gap-2 mt-auto pt-4 border-t-2 border-black dark:border-gray-600">
