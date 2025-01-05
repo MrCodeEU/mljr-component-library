@@ -8,17 +8,17 @@ TODO: Add Git workflow to build npm package and publisch on main push
 
 
 # Components 
-- [] Navbar
-- [] Footer
-- [] Login / Register
-- [] Login / Register Modals?
-- [] ...
+- [ ] Navbar
+- [ ] Footer
+- [ ] Login / Register
+- [ ] Login / Register Modals?
+- [ ] ...
 
 # Elements
-- [] Cards
-- [] Buttons
-- [] Form Elements (Inputs, Files Uploads, Date Pickers etc)
-- [] Avatars
-- [] Image Carousel
-- [] Progress Bars
-- [] ...
+- [ ] Cards
+- [ ] Buttons
+- [ ] Form Elements (Inputs, Files Uploads, Date Pickers etc)
+- [ ] Avatars
+- [ ] Image Carousel
+- [ ] Progress Bars
+- [ ] ...
