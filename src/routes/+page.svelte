@@ -34,6 +34,7 @@
         DatabaseSolid,
         CloudArrowUpSolid
     } from 'flowbite-svelte-icons';
+	import Avatar from '$lib/UI/Avatar.svelte';
 
 	let navbarProps = {
 		logos: {
@@ -388,6 +389,108 @@
 					
 				/>
 			{/each}
+		</div>
+	</div>
+
+	<!-- Avatar Showcase -->
+	<div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
+		<h2 class="mb-4 text-2xl font-bold dark:text-white">Avatar Variants</h2>
+		
+		<!-- Size Variants -->
+		<div class="mb-8">
+			<h3 class="mb-4 text-xl font-bold dark:text-white">Size Variants</h3>
+			<div class="flex items-center flex-nowrap gap-8 overflow-x-auto pb-4">
+				<Avatar
+					name="John Doe"
+					subheading="Developer"
+					size="sm"
+					colorIndex={0}
+				/>
+				<Avatar
+					name="Jane Smith"
+					subheading="Designer"
+					size="md"
+					colorIndex={1}
+					image="https://i.pravatar.cc/150?img=1"
+				/>
+				<Avatar
+					name="Bob Wilson"
+					subheading="Manager"
+					size="lg"
+					colorIndex={2}
+				/>
+				<Avatar
+					name="Alice Brown"
+					subheading="CEO"
+					size="xl"
+					colorIndex={3}
+					image="https://i.pravatar.cc/150?img=2"
+				/>
+			</div>
+		</div>
+
+		<!-- Color Variants -->
+		<div class="mb-8">
+			<h3 class="mb-4 text-xl font-bold dark:text-white">Color Variants</h3>
+			<div class="flex items-center flex-nowrap gap-8 overflow-x-auto pb-4">
+				{#each Array(6) as _, i}
+					<Avatar
+						name={`User ${i + 1}`}
+						size="md"
+						colorIndex={i}
+					/>
+				{/each}
+			</div>
+		</div>
+
+		<!-- Direction Variants -->
+		<div class="mb-8">
+			<h3 class="mb-4 text-xl font-bold dark:text-white">Direction Variants</h3>
+			<div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+				<Avatar
+					name="Up Direction"
+					subheading="Points Up"
+					direction="up"
+					colorIndex={0}
+				/>
+				<Avatar
+					name="Down Direction"
+					subheading="Points Down"
+					direction="down"
+					colorIndex={1}
+				/>
+				<Avatar
+					name="Left Direction"
+					subheading="Points Left"
+					direction="left"
+					colorIndex={2}
+				/>
+				<Avatar
+					name="Right Direction"
+					subheading="Points Right"
+					direction="right"
+					colorIndex={3}
+				/>
+			</div>
+		</div>
+
+		<!-- Rounded vs Square -->
+		<div class="mb-8">
+			<h3 class="mb-4 text-xl font-bold dark:text-white">Shape Variants</h3>
+			<div class="flex gap-8">
+				<Avatar
+					name="Rounded Avatar"
+					subheading="Default rounded"
+					colorIndex={4}
+					rounded={true}
+				/>
+				<Avatar
+					name="Square Avatar"
+					subheading="No rounding"
+					colorIndex={5}
+					rounded={false}
+				/>
+			</div>
 		</div>
 	</div>
 
