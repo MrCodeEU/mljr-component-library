@@ -26,4 +26,5 @@ TODO: Add Git workflow to build npm package and publisch on main push
 - [ ] Badges
 - [X] Image Carousel
 - [X] Progress Bars
+- [x] Background
 - [ ] ...
