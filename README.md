@@ -14,7 +14,7 @@ TODO: Add Git workflow to build npm package and publisch on main push
 - [ ] Login / Register Modals
 - [x] Language Toggle (Using Paraglide)
 - [ ] Toast
-- [ ] Skill Badges
+- [x] Skill Badges
 - [ ] ...
 
 # Elements
@@ -23,7 +23,7 @@ TODO: Add Git workflow to build npm package and publisch on main push
 - [x] Toggle
 - [ ] Form Elements (Inputs, Files Uploads, Date Pickers etc)
 - [ ] Avatars
-- [ ] Badges
+- [x] Badges
 - [X] Image Carousel
 - [X] Progress Bars
 - [x] Background
