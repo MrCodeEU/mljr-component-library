@@ -13,14 +13,17 @@ TODO: Add Git workflow to build npm package and publisch on main push
 - [ ] Login / Register
 - [ ] Login / Register Modals
 - [x] Language Toggle (Using Paraglide)
+- [ ] Toast
+- [ ] Skill Badges
 - [ ] ...
 
 # Elements
 - [x] Cards
 - [x] Buttons
 - [x] Toggle
-- [] Form Elements (Inputs, Files Uploads, Date Pickers etc)
-- [] Avatars
-- [] Image Carousel
-- [] Progress Bars
-- [] ...
+- [ ] Form Elements (Inputs, Files Uploads, Date Pickers etc)
+- [ ] Avatars
+- [ ] Badges
+- [X] Image Carousel
+- [X] Progress Bars
+- [ ] ...

@@ -24,10 +24,10 @@
     } = $props();
     
     const sizeMap = {
-        sm: 'h-1.5',
-        md: 'h-3',
-        lg: 'h-4',
-        xl: 'h-5'
+        sm: 'h-3',
+        md: 'h-5',
+        lg: 'h-7',
+        xl: 'h-9'
     };
 
     const colorClasses = $derived(getColor(colorIndex));
@@ -45,7 +45,7 @@
             tweenDuration={duration}
             easing={cubicOut}
             divClass="w-full bg-gray-200 dark:bg-gray-700 border border-black rounded-none"
-            progressClass="rounded-none {colorClasses}"
+            progressClass="rounded-none {colorClasses} h-full"
             labelInsideClass="font-mono text-xs font-bold text-black dark:text-white flex items-center justify-center h-full"
         />
     </div>
