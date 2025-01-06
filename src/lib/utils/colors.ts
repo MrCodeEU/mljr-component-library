@@ -80,3 +80,18 @@ export const getColor = (index: number = 0, variant: 'default' | 'outline' | 'te
         return 'bg-gray-200 hover:bg-gray-300 text-black dark:text-white';
     }
 }
+
+export const getColorHex = (index: number = 0, isDark: boolean = isDarkMode()): string => {
+    try {
+        const colorSet = brutalistColors[index % brutalistColors.length];
+        const bgParts = colorSet.bg.split(' ');
+        
+        const bgColor = bgParts[0].replace('bg-', '');
+        const darkBgColor = bgParts[1]?.replace('dark:bg-', '') || bgColor;
+        
+        const selectedColor = isDark ? darkBgColor : bgColor;
+        return colorMap[selectedColor as keyof typeof colorMap] || '#000000';
+    } catch {
+        return '#e5e7eb'; // gray-200 as fallback
+    }
+}
