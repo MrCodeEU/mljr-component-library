@@ -7,8 +7,8 @@
         subheading = '',
         image = { src: '', alt: '' },
         colorIndex = 0,
-        children = () => '',
-        buttons = () => ''
+        children,
+        buttons
     } = $props<{
         heading?: string;
         subheading?: string;
@@ -31,7 +31,7 @@
             <h4 class="text-lg font-mono">{subheading}</h4>
         {/if}
         <div class="content">
-            {#if children}{@render children()}{/if}
+            {@render children?.()}
         </div>
         {#if buttons}
             <div class="buttons flex gap-2 mt-auto pt-4 border-t-2 border-black dark:border-white">

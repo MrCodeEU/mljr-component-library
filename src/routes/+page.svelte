@@ -1,33 +1,33 @@
 <script lang="ts">
-	import Navbar from '$lib/Navigation/Navbar.svelte';
-	import Logo_h from '$lib/images/Logo_h.png';
-	import Logo_h_w from '$lib/images/Logo_h_w.png';
-	import Logo_h_b from '$lib/images/Logo_h_b.png';
+    import Navbar from '$lib/Navigation/Navbar.svelte';
+    import Logo_h from '$lib/images/Logo_h.png';
+    import Logo_h_w from '$lib/images/Logo_h_w.png';
+    import Logo_h_b from '$lib/images/Logo_h_b.png';
     import { Card } from 'flowbite-svelte';
     import Button from '$lib/UI/Button.svelte';
     import { brutalistColors, getColor } from '$lib/utils/colors';
     import Footer from '$lib/Navigation/Footer.svelte';
     import { HomeOutline, MailBoxOutline, PhoneOutline, TwitterSolid, FacebookSolid, GithubSolid, SunSolid, MoonSolid } from 'flowbite-svelte-icons';
     import Toggle from '$lib/UI/Toggle.svelte';
-	import * as m from '$lib/paraglide/messages.js'
+    import * as m from '$lib/paraglide/messages.js';
     import ProgressBar from '$lib/UI/ProgressBar.svelte';
     import { onMount } from 'svelte';
     import ImageSlider from '$lib/UI/ImageSlider.svelte';
-    
-	let navbarProps = {
-		logos: {
-			light: Logo_h_b,
-			dark: Logo_h_w
-		},
-		globalLinks: [
-			{ href: '/about', text: 'About' },
-			{ href: '/contact', text: 'Contact' }
-		],
-		sectionLinks: [
-			{ href: '/sudoku/easy', text: 'Easy Sudoku' },
-			{ href: '/sudoku/hard', text: 'Hard Sudoku' }
-		]
-	};
+
+    let navbarProps = {
+        logos: {
+            light: Logo_h_b,
+            dark: Logo_h_w
+        },
+        globalLinks: [
+            { href: '/about', text: 'About' },
+            { href: '/contact', text: 'Contact' }
+        ],
+        sectionLinks: [
+            { href: '/sudoku/easy', text: 'Easy Sudoku' },
+            { href: '/sudoku/hard', text: 'Hard Sudoku' }
+        ]
+    };
 
     const footerSections = [
         {
@@ -107,20 +107,24 @@
         },
     ];
 
-    let animatedProgress = $state(0);
-    let toggleState = $state(false);
-    let toggleState2 = $state(true);
-    let themeToggle = $state(false);
-    let petToggle = $state(false);
-    let simpleToggle = $state(false);
-    let statusToggle = $state(false);
+    let animatedProgress = 0;
+    let toggleState = false;
+    let toggleState2 = true;
+    let themeToggle = false;
+    let petToggle = false;
+    let simpleToggle = false;
+    let statusToggle = false;
     
-    $effect(() => {
-        const interval = setInterval(() => {
+    let interval: number;
+
+    onMount(() => {
+        interval = window.setInterval(() => {
             animatedProgress = (animatedProgress + 1) % 101;
         }, 100);
 
-        return () => clearInterval(interval);
+        return () => {
+            if (interval) clearInterval(interval);
+        };
     });
 
     function handleThemeToggle(checked: boolean) {
@@ -140,23 +144,11 @@
     }
 
     function toggleLanguage() {
-        setLanguage(m.language() === 'en' ? 'de' : 'en');
+        setLanguage(language() === 'en' ? 'de' : 'en');
     }
 </script>
 
-<Navbar {...navbarProps}>
-    <svelte:fragment slot="extra">
-        <Toggle 
-            size="md" 
-            colorIndex={4}
-            checked={m.language() === 'de'}
-            onChange={toggleLanguage}
-        >
-            <svelte:fragment slot="left">EN</svelte:fragment>
-            <svelte:fragment slot="right">DE</svelte:fragment>
-        </Toggle>
-    </svelte:fragment>
-</Navbar>
+<Navbar {...navbarProps}></Navbar>
 
 <div class="container mx-auto p-8">
     <!-- Color Showcase -->
@@ -201,28 +193,30 @@
                 colorIndex={2}
                 checked={themeToggle}
                 onChange={handleThemeToggle}
-            >
-                <svelte:fragment slot="left">
-                    <SunSolid class="w-8 h-8" />
-                </svelte:fragment>
-                <svelte:fragment slot="right">
-                    <MoonSolid class="w-8 h-8" />
-                </svelte:fragment>
-            </Toggle>
+                left={() => `
+                    <div class="w-8 h-8 flex items-center justify-center text-black dark:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                        </svg>
+                    </div>
+                `}
+                right={() => `
+                    <div class="w-8 h-8 flex items-center justify-center text-black dark:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                `}
+            />
             <Toggle 
                 label="Pet Choice" 
                 size="md" 
                 colorIndex={3}
                 checked={petToggle}
                 onChange={handlePetToggle}
-            >
-                <svelte:fragment slot="left">
-                    <img src="https://placekitten.com/32/32" alt="cat" class="rounded-full" />
-                </svelte:fragment>
-                <svelte:fragment slot="right">
-                    <span class="text-2xl">🐶</span>
-                </svelte:fragment>
-            </Toggle>
+                left={() => `<img src="https://placekitten.com/32/32" alt="cat" class="rounded-full w-8 h-8" />`}
+                right={() => `<span class="text-2xl w-8 h-8 flex items-center justify-center">🐶</span>`}
+            />
             <Toggle 
                 label="Simple Text" 
                 size="md" 
@@ -238,14 +232,9 @@
                 colorIndex={0}
                 checked={statusToggle}
                 onChange={handleStatusToggle}
-            >
-                <svelte:fragment slot="left">
-                    <span class="text-xl">❌</span>
-                </svelte:fragment>
-                <svelte:fragment slot="right">
-                    <span class="text-xl">✅</span>
-                </svelte:fragment>
-            </Toggle>
+                left={() => `<span class="text-xl w-8 h-8 flex items-center justify-center">❌</span>`}
+                right={() => `<span class="text-xl w-8 h-8 flex items-center justify-center">✅</span>`}
+            />
         </div>
     </div>
 

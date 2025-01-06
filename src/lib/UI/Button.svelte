@@ -1,22 +1,14 @@
 <script lang="ts">
     import { getColor } from '$lib/utils/colors';
 
-    interface Props {
-        variant?: 'default' | 'outline' | 'text';
-        size?: 'sm' | 'md' | 'lg';
-        rounded?: boolean;
-        colorIndex?: number;
-        type?: 'button' | 'submit' | 'reset';
-        disabled?: boolean;
-        onclick?: (event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void;
-    }
-    const { 
+    let { 
         size = 'md',
         colorIndex = 0,
         rounded = false,
         variant = 'default',
         disabled = false,
         onclick,
+        children,
         ...props
     } = $props();
 
@@ -34,16 +26,14 @@
     ].join(' '));
 
     function handleClick(event: MouseEvent) {
-        if (onclick) {
-            onclick(event);
-        }
+        onclick?.(event);
     }
 </script>
 
 <button
     class="neo-brutalist-button {buttonClasses}"
-    onclick={handleClick}
+    {onclick}
     {...props}
 >
-    <slot />
+    {@render children?.()}
 </button>

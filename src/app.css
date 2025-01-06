@@ -58,4 +58,12 @@
     overflow-hidden
     transition-all duration-200 ease-in-out;
   }
+
+  .mobile-menu .neo-brutalist-container {
+    @apply !shadow-none;
+  }
+
+  .mobile-menu .neo-brutalist-container {
+    @apply !shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] !translate-x-0 !translate-y-0;
+  }
 }

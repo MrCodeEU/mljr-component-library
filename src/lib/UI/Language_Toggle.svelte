@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type { AvailableLanguageTag } from '$lib/paraglide/runtime';
-    import { i18n } from '$lib/i18n';
     import { page } from '$app/stores';
     import { goto } from '$app/navigation';
     import Toggle from './Toggle.svelte';
+    import { i18n } from '$lib/i18n';
+
 
     const languageIcons = {
         'en': '🇬🇧',
@@ -32,12 +32,7 @@
         onChange={handleChange}
         size="md"
         colorIndex={2}
-    >
-        <svelte:fragment slot="left">
-            <span class="text-base">{languageIcons['en']}</span>
-        </svelte:fragment>
-        <svelte:fragment slot="right">
-            <span class="text-base">{languageIcons['de']}</span>
-        </svelte:fragment>
-    </Toggle>
+        left={() => `<span class="text-base">${languageIcons['en']}</span>`}
+        right={() => `<span class="text-base">${languageIcons['de']}</span>`}
+    />
 </div>
