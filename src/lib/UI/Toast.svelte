@@ -94,7 +94,7 @@
                 <div
                     class="h-full bg-black dark:bg-white transition-[width] duration-100 ease-linear"
                     style="width: {progress}%"
-                />
+                ></div>
             </div>
         {/if}
     </div>

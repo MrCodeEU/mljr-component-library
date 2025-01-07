@@ -100,4 +100,33 @@
   .toast-group {
     @apply pointer-events-none;
   }
+
+  .neo-brutalist-input-container {
+    @apply w-full;
+  }
+
+  .neo-brutalist-input {
+    @apply w-full
+    border-2 border-black
+    font-mono
+    shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
+    hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
+    focus:shadow-none
+    focus:translate-x-[4px] focus:translate-y-[4px]
+    focus:outline-none
+    rounded-none
+    transition-all;
+  }
+
+  .neo-brutalist-input-container.input-error .neo-brutalist-input {
+    @apply !border-red-500 dark:!border-red-700
+    !shadow-[4px_4px_0px_0px_theme(colors.red.500)]
+    dark:!shadow-[4px_4px_0px_0px_theme(colors.red.700)];
+  }
+
+  .neo-brutalist-input-container.input-success .neo-brutalist-input {
+    @apply !border-green-500 dark:!border-green-700
+    !shadow-[4px_4px_0px_0px_theme(colors.green.500)]
+    dark:!shadow-[4px_4px_0px_0px_theme(colors.green.700)];
+  }
 }

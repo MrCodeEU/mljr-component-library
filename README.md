@@ -13,7 +13,7 @@ TODO: Add Git workflow to build npm package and publisch on main push
 - [ ] Login / Register
 - [ ] Login / Register Modals
 - [x] Language Toggle (Using Paraglide)
-- [ ] Toast
+- [x] Toast
 - [x] Skill Badges
 - [ ] ...
 

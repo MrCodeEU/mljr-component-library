@@ -37,6 +37,20 @@
 	import Avatar from '$lib/UI/Avatar.svelte';
     import ToastProvider from '$lib/UI/ToastProvider.svelte';
     import { toast } from 'svoast';
+    import { 
+        SearchOutline,
+        EnvelopeOutline,
+        LockSolid,
+        UserCircleOutline
+    } from 'flowbite-svelte-icons';
+    import NeoInput from '$lib/UI/Forms/NeoInput.svelte';
+    import {
+        EnvelopeSolid,
+        SearchSolid,
+        UserSolid,
+        EyeSlashSolid,
+        EyeSolid
+    } from 'flowbite-svelte-icons';
 
 	let navbarProps = {
 		logos: {
@@ -286,6 +300,8 @@
             }, index * 500);
         });
     }
+
+    let showPassword = $state(false);
 </script>
 
 <div class="relative">
@@ -764,6 +780,122 @@
                     >
                         Error with Custom Color
                     </Button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Elements Showcase -->
+        <div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
+            <h2 class="mb-4 text-2xl font-bold dark:text-white">Form Elements</h2>
+            
+            <!-- Basic Text Inputs -->
+            <div class="mb-8">
+                <h3 class="mb-4 text-lg font-bold dark:text-white">Text Inputs</h3>
+                <div class="grid gap-6 md:grid-cols-2">
+                    <NeoInput
+                        label="Default Input"
+                        placeholder="Enter text..."
+                    />
+                    
+                    <NeoInput
+                        label="With Icon"
+                        placeholder="Search..."
+                    >
+                        <SearchSolid slot="left" class="w-5 h-5" />
+                    </NeoInput>
+                    
+                    <NeoInput
+                        label="Email Input"
+                        type="email"
+                        placeholder="email@example.com"
+                        required
+                    >
+                        <EnvelopeSolid slot="left" class="w-5 h-5" />
+                    </NeoInput>
+                    
+                    <NeoInput
+                        label="Password"
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="Enter password"
+                    >
+                        <button 
+                            slot="right" 
+                            class="focus:outline-none" 
+                            on:click={() => showPassword = !showPassword}
+                        >
+                            <svelte:component 
+                                this={showPassword ? EyeSolid : EyeSlashSolid} 
+                                class="w-5 h-5"
+                            />
+                        </button>
+                    </NeoInput>
+                </div>
+            </div>
+
+            <!-- Input Sizes -->
+            <div class="mb-8">
+                <h3 class="mb-4 text-lg font-bold dark:text-white">Input Sizes</h3>
+                <div class="flex flex-col gap-4">
+                    <NeoInput
+                        size="sm"
+                        placeholder="Small input"
+                    />
+                    
+                    <NeoInput
+                        size="md"
+                        placeholder="Medium input"
+                    />
+                    
+                    <NeoInput
+                        size="lg"
+                        placeholder="Large input"
+                    />
+                </div>
+            </div>
+
+            <!-- Input States -->
+            <div class="mb-8">
+                <h3 class="mb-4 text-lg font-bold dark:text-white">Input States</h3>
+                <div class="grid gap-6 md:grid-cols-2">
+                    <NeoInput
+                        label="Disabled Input"
+                        value="Can't edit this"
+                        disabled
+                    />
+                    
+                    <NeoInput
+                        label="With Error"
+                        value="Invalid input"
+                        error="This field is required"
+                        colorIndex={4}
+                    />
+                    
+                    <NeoInput
+                        label="With Success"
+                        value="Valid input"
+                        success="Looks good!"
+                        colorIndex={2}
+                    />
+                    
+                    <NeoInput
+                        label="Required Field"
+                        placeholder="Must fill this"
+                        required
+                    />
+                </div>
+            </div>
+
+            <!-- Color Variants -->
+            <div class="mb-8">
+                <h3 class="mb-4 text-lg font-bold dark:text-white">Color Variants</h3>
+                <div class="grid gap-4 md:grid-cols-3">
+                    {#each Array(6) as _, i}
+                        <NeoInput
+                            placeholder="Colored input"
+                            colorIndex={i}
+                            icon={UserSolid}
+                        />
+                    {/each}
                 </div>
             </div>
         </div>
