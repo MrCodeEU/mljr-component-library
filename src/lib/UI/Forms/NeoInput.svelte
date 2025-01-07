@@ -28,8 +28,8 @@
 
     const wrapperClass = $derived(`
         relative
-        ${focused ? 'translate-x-[4px] translate-y-[4px]' : ''}
         transition-transform
+        ${focused ? 'translate-x-[6px] translate-y-[6px]' : ''}
     `);
 
     const inputClass = $derived(`
@@ -77,7 +77,11 @@
         </label>
     {/if}
 
-    <div class={wrapperClass}>
+    <div 
+        class={wrapperClass}
+        class:hover:translate-x-[7px]={!focused}
+        class:hover:translate-y-[7px]={!focused}
+    >
         {#if $$slots.left}
             <div class={`${iconClass} left-3`} class:pointer-events-none={!$$slots.right}>
                 <slot name="left"/>

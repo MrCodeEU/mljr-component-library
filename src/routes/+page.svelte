@@ -52,6 +52,7 @@
         EyeSolid
     } from 'flowbite-svelte-icons';
     import RangeSlider from '$lib/UI/Forms/RangeSlider.svelte';
+    import NumberInput from '$lib/UI/Forms/NumberInput.svelte';
 
 	let navbarProps = {
 		logos: {
@@ -892,6 +893,115 @@
                 <div class="grid gap-4 md:grid-cols-3">
                     {#each Array(6) as _, i}
                         <NeoInput
+                            placeholder="Colored input"
+                            colorIndex={i}
+                            icon={UserSolid}
+                        />
+                    {/each}
+                </div>
+            </div>
+        </div>
+
+        <!-- Number Input Showcase -->
+        <div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
+            <h2 class="mb-4 text-2xl font-bold dark:text-white">Number Inputs</h2>
+            
+            <!-- Basic Examples -->
+            <div class="mb-8">
+                <h3 class="mb-4 text-lg font-bold dark:text-white">Basic Examples</h3>
+                <div class="grid gap-6 md:grid-cols-2">
+                    <NumberInput
+                        label="Basic Number Input"
+                        value={42}
+                        colorIndex={0}
+                    />
+                    
+                    <NumberInput
+                        label="With Min/Max"
+                        value={5}
+                        min={0}
+                        max={10}
+                        colorIndex={1}
+                    />
+                    
+                    <NumberInput
+                        label="With Step (5)"
+                        value={25}
+                        step={5}
+                        colorIndex={2}
+                    />
+                    
+                    <NumberInput
+                        label="Decimal Step (0.5)"
+                        value={2.5}
+                        step={0.5}
+                        colorIndex={3}
+                    />
+                </div>
+            </div>
+
+            <!-- Input States -->
+            <div class="mb-8">
+                <h3 class="mb-4 text-lg font-bold dark:text-white">Input States</h3>
+                <div class="grid gap-6 md:grid-cols-2">
+                    <NumberInput
+                        label="Disabled Input"
+                        value={100}
+                        disabled
+                        colorIndex={4}
+                    />
+                    
+                    <NumberInput
+                        label="Read Only"
+                        value={42}
+                        readonly
+                        colorIndex={5}
+                    />
+                    
+                    <NumberInput
+                        label="With Error"
+                        value={999}
+                        max={100}
+                        error="Value exceeds maximum!"
+                        colorIndex={1}
+                    />
+                    
+                    <NumberInput
+                        label="With Success"
+                        value={50}
+                        success="Perfect value!"
+                        colorIndex={2}
+                    />
+                </div>
+            </div>
+
+            <!-- With Icons -->
+            <div class="mb-8">
+                <h3 class="mb-4 text-lg font-bold dark:text-white">With Icons</h3>
+                <div class="grid gap-6 md:grid-cols-2">
+                    <NumberInput
+                        label="Left Icon"
+                        value={50}
+                        leftIcon={SearchOutline}
+                        colorIndex={3}
+                    />
+                    
+                    <NumberInput
+                        label="Right Icon (No Buttons)"
+                        value={75}
+                        rightIcon={UserCircleOutline}
+                        showButtons={false}
+                        colorIndex={4}
+                    />
+                </div>
+            </div>
+
+            <!-- Color Variants -->
+            <div class="mb-8">
+                <h3 class="mb-4 text-lg font-bold dark:text-white">Color Variants</h3>
+                <div class="grid gap-4 md:grid-cols-3">
+                    {#each Array(6) as _, i}
+                        <NumberInput
                             placeholder="Colored input"
                             colorIndex={i}
                             icon={UserSolid}
