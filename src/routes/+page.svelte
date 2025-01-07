@@ -35,6 +35,8 @@
         CloudArrowUpSolid
     } from 'flowbite-svelte-icons';
 	import Avatar from '$lib/UI/Avatar.svelte';
+    import ToastProvider from '$lib/UI/ToastProvider.svelte';
+    import { toast } from 'svoast';
 
 	let navbarProps = {
 		logos: {
@@ -134,6 +136,7 @@
     let petToggle = $state(false);
     let simpleToggle = $state(false);
     let statusToggle = $state(false);
+    let toastPosition = $state('top-right');
 
 	let interval: number;
 
@@ -170,364 +173,605 @@
 	let darkMode = $derived(
 		typeof document !== 'undefined' ? document.documentElement.classList.contains('dark') : false
 	);
+
+    const typeColorMap = {
+        info: 0,
+        attention: 1,
+        success: 2,
+        warning: 3,
+        error: 4
+    };
+
+    function showToast(type: string, options: any = {}) {
+        const config = {
+            duration: 5000,
+            closable: true,
+            colorIndex: options.colorIndex ?? typeColorMap[type as keyof typeof typeColorMap],
+            ...options
+        };
+        
+        switch (type) {
+            case 'info':
+                toast.info('This is an info message', config);
+                break;
+            case 'attention':
+                toast.attention('This needs your attention!', config);
+                break;
+            case 'success':
+                toast.success('Operation completed successfully!', config);
+                break;
+            case 'warning':
+                toast.warning('Warning: This action cannot be undone', config);
+                break;
+            case 'error':
+                toast.error('An error occurred!', config);
+                break;
+        }
+    }
+
+    function showRichToast() {
+        toast.success('<strong>Rich Content:</strong><br>This toast supports <em>HTML</em> formatting', {
+            rich: true,
+            duration: 5000,
+            colorIndex: 2
+        });
+    }
+
+    function showStackedToast() {
+        toast.info('First Toast');
+        setTimeout(() => toast.success('Second Toast'), 500);
+        setTimeout(() => toast.warning('Third Toast'), 1000);
+    }
+
+    async function simulatePromise() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                Math.random() > 0.5 ? resolve('Success!') : reject('Failed!');
+            }, 2000);
+        });
+    }
+
+    function showPromiseToast() {
+        toast.promise(simulatePromise(), {
+            loading: 'Processing your request...',
+            success: 'Operation completed successfully!',
+            error: 'Something went wrong!'
+        });
+    }
+
+    function showCustomToast() {
+        toast.success('Check this out!', {
+            duration: 5000,
+            infinite: false,
+            closable: true,
+            colorIndex: 5
+        });
+    }
+
+    function showTimedToast() {
+        toast.success('This toast will disappear in 10 seconds', {
+            duration: 10000,
+            colorIndex: 2
+        });
+    }
+
+    function showInfiniteToast() {
+        toast.warning('This toast will stay until dismissed', {
+            infinite: true,
+            colorIndex: 3,
+			closable: true
+        });
+    }
+
+    function showComplexToast() {
+        toast.success('Operation completed!', {
+            duration: 5000,
+            colorIndex: 2,
+            onMount: () => console.log('Toast mounted'),
+            onRemove: () => console.log('Toast removed')
+        });
+    }
+
+    function updateToastPosition(position: string) {
+        toastPosition = position;
+    }
+
+    function showColorVariants() {
+        brutalistColors.forEach((_, index) => {
+            setTimeout(() => {
+                toast.info(`Toast with color index ${index}`, {
+                    duration: 5000,
+                    colorIndex: index
+                });
+            }, index * 500);
+        });
+    }
 </script>
 
-<Background
-    colorIndex={1}
-    secondaryColorIndex={2}
-    tertiaryColorIndex={3}
-    backgroundColorIndex={0}
-    animate={true}
-    speed={5}
-    pattern="steps"
-    opacity={0.4}  
-/>
+<div class="relative">
+    <ToastProvider position={toastPosition} />
+    <Background
+        colorIndex={1}
+        secondaryColorIndex={2}
+        tertiaryColorIndex={3}
+        backgroundColorIndex={0}
+        animate={true}
+        speed={5}
+        pattern="steps"
+        opacity={0.4}  
+    />
 
-<Navbar {...navbarProps}></Navbar>
+    <Navbar {...navbarProps}></Navbar>
 
-<div class="container mx-auto p-8">
-	<!-- Color Showcase -->
-	<div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
-		<h2 class="mb-4 text-2xl font-bold dark:text-white">{m.color_palette()}</h2>
-		<div class="grid grid-cols-2 gap-4 md:grid-cols-3">
-			{#each brutalistColors as color, i}
-				<div class="flex flex-col gap-2">
-					<div class={`neo-brutalist-button h-24 ${getColor(i)}`}>
-						<div class="p-2 font-mono text-sm">{m.color_number({ number: i + 1 })}</div>
-					</div>
-					<div class={`neo-brutalist-button h-12 ${getColor(i)}`}>
-						<div class="p-2 font-mono text-sm">Hover</div>
-					</div>
-				</div>
-			{/each}
-		</div>
-	</div>
-
-	<!-- Button Showcase -->
-	<div class="mb-8 rounded-lg bg-gray-100 p-4">
-		<h2 class="mb-4 text-2xl font-bold">{m.button_variants()}</h2>
-		<div class="flex flex-wrap gap-4">
-			<Button>{m.button_default()}</Button>
-			<Button variant="outline">{m.button_outline()}</Button>
-			<Button variant="text">{m.button_text()}</Button>
-			<Button rounded>{m.button_rounded()}</Button>
-			<Button size="sm">{m.button_small()}</Button>
-			<Button size="lg">{m.button_large()}</Button>
-			<Button colorIndex={1}>{m.button_colored()}</Button>
-			<Button disabled>{m.button_disabled()}</Button>
-		</div>
-	</div>
-
-	<!-- Toggle Showcase -->
-	<div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
-		<h2 class="mb-4 text-2xl font-bold dark:text-white">Toggle Variants</h2>
-		<div class="flex flex-col gap-4">
-			<Toggle
-				label="Theme Toggle"
-				size="lg"
-				colorIndex={2}
-				checked={themeToggle}
-				onChange={handleThemeToggle}
-				left={() => `
-                    <div class="w-8 h-8 flex items-center justify-center text-black dark:text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                            <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
-                        </svg>
+    <div class="container mx-auto p-8">
+        <!-- Color Showcase -->
+        <div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
+            <h2 class="mb-4 text-2xl font-bold dark:text-white">{m.color_palette()}</h2>
+            <div class="grid grid-cols-2 gap-4 md:grid-cols-3">
+                {#each brutalistColors as color, i}
+                    <div class="flex flex-col gap-2">
+                        <div class={`neo-brutalist-button h-24 ${getColor(i)}`}>
+                            <div class="p-2 font-mono text-sm">{m.color_number({ number: i + 1 })}</div>
+                        </div>
+                        <div class={`neo-brutalist-button h-12 ${getColor(i)}`}>
+                            <div class="p-2 font-mono text-sm">Hover</div>
+                        </div>
                     </div>
-                `}
-				right={() => `
-                    <div class="w-8 h-8 flex items-center justify-center text-black dark:text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                            <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
-                        </svg>
-                    </div>
-                `}
-			/>
-			<Toggle
-				label="Pet Choice"
-				size="md"
-				colorIndex={3}
-				checked={petToggle}
-				onChange={handlePetToggle}
-				left={() =>
-					`<img src="https://placekitten.com/32/32" alt="cat" class="rounded-full w-8 h-8" />`}
-				right={() => `<span class="text-2xl w-8 h-8 flex items-center justify-center">🐶</span>`}
-			/>
-			<Toggle
-				label="Simple Text"
-				size="md"
-				leftText="OFF"
-				rightText="ON"
-				colorIndex={1}
-				checked={simpleToggle}
-				onChange={handleSimpleToggle}
-			/>
-			<Toggle
-				label="Status"
-				size="lg"
-				colorIndex={0}
-				checked={statusToggle}
-				onChange={handleStatusToggle}
-				left={() => `<span class="text-xl w-8 h-8 flex items-center justify-center">❌</span>`}
-				right={() => `<span class="text-xl w-8 h-8 flex items-center justify-center">✅</span>`}
-			/>
-		</div>
-	</div>
+                {/each}
+            </div>
+        </div>
 
-	<!-- Progress Bar Showcase -->
-	<div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
-		<h2 class="mb-4 text-2xl font-bold dark:text-white">Progress Bar Variants</h2>
-		<div class="flex flex-col gap-6">
-			<!-- Basic Progress Bars -->
-			<div class="space-y-4">
-				<ProgressBar progress={75} colorIndex={0} size="sm" />
-				<ProgressBar progress={60} colorIndex={1} size="md" />
-				<ProgressBar progress={45} colorIndex={2} size="lg" />
-				<ProgressBar progress={30} colorIndex={3} size="xl" />
-			</div>
+        <!-- Button Showcase -->
+        <div class="mb-8 rounded-lg bg-gray-100 p-4">
+            <h2 class="mb-4 text-2xl font-bold">{m.button_variants()}</h2>
+            <div class="flex flex-wrap gap-4">
+                <Button>{m.button_default()}</Button>
+                <Button variant="outline">{m.button_outline()}</Button>
+                <Button variant="text">{m.button_text()}</Button>
+                <Button rounded>{m.button_rounded()}</Button>
+                <Button size="sm">{m.button_small()}</Button>
+                <Button size="lg">{m.button_large()}</Button>
+                <Button colorIndex={1}>{m.button_colored()}</Button>
+                <Button disabled>{m.button_disabled()}</Button>
+            </div>
+        </div>
 
-			<!-- Progress Bars with Labels -->
-			<div class="space-y-4">
-				<ProgressBar progress={80} colorIndex={4} size="md" showLabel />
-				<ProgressBar progress={65} colorIndex={5} size="lg" label="Loading..." showLabel />
-			</div>
+        <!-- Toggle Showcase -->
+        <div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
+            <h2 class="mb-4 text-2xl font-bold dark:text-white">Toggle Variants</h2>
+            <div class="flex flex-col gap-4">
+                <Toggle
+                    label="Theme Toggle"
+                    size="lg"
+                    colorIndex={2}
+                    checked={themeToggle}
+                    onChange={handleThemeToggle}
+                    left={() => `
+                        <div class="w-8 h-8 flex items-center justify-center text-black dark:text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                            </svg>
+                        </div>
+                    `}
+                    right={() => `
+                        <div class="w-8 h-8 flex items-center justify-center text-black dark:text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                    `}
+                />
+                <Toggle
+                    label="Pet Choice"
+                    size="md"
+                    colorIndex={3}
+                    checked={petToggle}
+                    onChange={handlePetToggle}
+                    left={() =>
+                        `<img src="https://placekitten.com/32/32" alt="cat" class="rounded-full w-8 h-8" />`}
+                    right={() => `<span class="text-2xl w-8 h-8 flex items-center justify-center">🐶</span>`}
+                />
+                <Toggle
+                    label="Simple Text"
+                    size="md"
+                    leftText="OFF"
+                    rightText="ON"
+                    colorIndex={1}
+                    checked={simpleToggle}
+                    onChange={handleSimpleToggle}
+                />
+                <Toggle
+                    label="Status"
+                    size="lg"
+                    colorIndex={0}
+                    checked={statusToggle}
+                    onChange={handleStatusToggle}
+                    left={() => `<span class="text-xl w-8 h-8 flex items-center justify-center">❌</span>`}
+                    right={() => `<span class="text-xl w-8 h-8 flex items-center justify-center">✅</span>`}
+                />
+            </div>
+        </div>
 
-			<!-- Animated Progress Bar -->
-			<div>
-				<ProgressBar
-					progress={animatedProgress}
-					colorIndex={2}
-					size="md"
-					showLabel
-					animate
-					duration={200}
-				/>
-			</div>
-		</div>
-	</div>
+        <!-- Progress Bar Showcase -->
+        <div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
+            <h2 class="mb-4 text-2xl font-bold dark:text-white">Progress Bar Variants</h2>
+            <div class="flex flex-col gap-6">
+                <!-- Basic Progress Bars -->
+                <div class="space-y-4">
+                    <ProgressBar progress={75} colorIndex={0} size="sm" />
+                    <ProgressBar progress={60} colorIndex={1} size="md" />
+                    <ProgressBar progress={45} colorIndex={2} size="lg" />
+                    <ProgressBar progress={30} colorIndex={3} size="xl" />
+                </div>
 
-	<!-- Image Slider Showcase -->
-	<div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
-		<h2 class="mb-4 text-2xl font-bold dark:text-white">Image Slider</h2>
-		<div class="space-y-8">
-			<ImageSlider
-				images={demoImages}
-				autoplay={true}
-				interval={5000}
-				colorIndex={2}
-				transitionEffect="fade"
-				showPagination={true}
-			/>
+                <!-- Progress Bars with Labels -->
+                <div class="space-y-4">
+                    <ProgressBar progress={80} colorIndex={4} size="md" showLabel />
+                    <ProgressBar progress={65} colorIndex={5} size="lg" label="Loading..." showLabel />
+                </div>
 
-			<ImageSlider
-				images={demoImages}
-				droneMode={false}
-				colorIndex={4}
-				transitionEffect="slide"
-				showPagination={true}
-				showControls={false}
-			/>
-		</div>
-	</div>
+                <!-- Animated Progress Bar -->
+                <div>
+                    <ProgressBar
+                        progress={animatedProgress}
+                        colorIndex={2}
+                        size="md"
+                        showLabel
+                        animate
+                        duration={200}
+                    />
+                </div>
+            </div>
+        </div>
 
-	<!-- Badge Showcase -->
-	<div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
-		<h2 class="mb-4 text-2xl font-bold dark:text-white">Badge Variants</h2>
-		<div class="flex flex-wrap items-start gap-4">
-			<!-- Basic Badges -->
-			<Badge text="Default Badge" />
-			<Badge text="Colored Badge" colorIndex={1} />
-			<Badge text="Large Badge" size="lg" colorIndex={2} />
-			<Badge text="Small Badge" size="sm" colorIndex={3} />
+        <!-- Image Slider Showcase -->
+        <div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
+            <h2 class="mb-4 text-2xl font-bold dark:text-white">Image Slider</h2>
+            <div class="space-y-8">
+                <ImageSlider
+                    images={demoImages}
+                    autoplay={true}
+                    interval={5000}
+                    colorIndex={2}
+                    transitionEffect="fade"
+                    showPagination={true}
+                />
 
-			<!-- Badges with Icons -->
-			<Badge 
-				text="New Feature" 
-				leftIcon={StarSolid}
-				colorIndex={4}
-			>
-                {#snippet children()}
-                    <p>This is some content</p>
-                {/snippet}
-            </Badge>
-			
-			<Badge 
-				text="Success" 
-				rightIcon={CheckCircleSolid}
-				colorIndex={5}
-			/>
+                <ImageSlider
+                    images={demoImages}
+                    droneMode={false}
+                    colorIndex={4}
+                    transitionEffect="slide"
+                    showPagination={true}
+                    showControls={false}
+                />
+            </div>
+        </div>
 
-			<!-- Badge with Content -->
-			<Badge 
-				text="Warning" 
-				leftIcon={ExclamationCircleSolid}
-				content="This is a detailed explanation"
-				colorIndex={1}
-				size="lg"
-			/>
-		</div>
-	</div>
+        <!-- Badge Showcase -->
+        <div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
+            <h2 class="mb-4 text-2xl font-bold dark:text-white">Badge Variants</h2>
+            <div class="flex flex-wrap items-start gap-4">
+                <!-- Basic Badges -->
+                <Badge text="Default Badge" />
+                <Badge text="Colored Badge" colorIndex={1} />
+                <Badge text="Large Badge" size="lg" colorIndex={2} />
+                <Badge text="Small Badge" size="sm" colorIndex={3} />
 
-	<!-- Skill Badge Showcase -->
-	<div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
-		<h2 class="mb-4 text-2xl font-bold dark:text-white">Skill Badges</h2>
-		<div class="flex flex-wrap items-start gap-4">
-			{#each [
-				{ name: "Programming", icon: CodeBranchSolid, prof: 95, color: 0 },
-				{ name: "Machine Learning", icon: BrainSolid, prof: 85, color: 1, text: "Advanced" },
-				{ name: "UI Design", icon: PenSolid, prof: 75, color: 2, size: "sm" },
-				{ name: "Backend", icon: ServerSolid, prof: 90, color: 3, text: "Expert" },
-				{ name: "Databases", icon: DatabaseSolid, prof: 80, color: 4 },
-				{ name: "Cloud Services", icon: CloudArrowUpSolid, prof: 70, color: 5, text: "Intermediate" }
-			] as skill}
-				<SkillBadge
-					skill={skill.name}
-					proficiency={skill.prof}
-					proficiencyText={skill.text}
-					icon={skill.icon}
-					colorIndex={skill.color}
-					
-				/>
-			{/each}
-		</div>
-	</div>
+                <!-- Badges with Icons -->
+                <Badge 
+                    text="New Feature" 
+                    leftIcon={StarSolid}
+                    colorIndex={4}
+                >
+                    {#snippet children()}
+                        <p>This is some content</p>
+                    {/snippet}
+                </Badge>
+                
+                <Badge 
+                    text="Success" 
+                    rightIcon={CheckCircleSolid}
+                    colorIndex={5}
+                />
 
-	<!-- Avatar Showcase -->
-	<div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
-		<h2 class="mb-4 text-2xl font-bold dark:text-white">Avatar Variants</h2>
-		
-		<!-- Size Variants -->
-		<div class="mb-8">
-			<h3 class="mb-4 text-xl font-bold dark:text-white">Size Variants</h3>
-			<div class="flex items-center flex-nowrap gap-8 overflow-x-auto pb-4">
-				<Avatar
-					name="John Doe"
-					subheading="Developer"
-					size="sm"
-					colorIndex={0}
-				/>
-				<Avatar
-					name="Jane Smith"
-					subheading="Designer"
-					size="md"
-					colorIndex={1}
-					image="https://i.pravatar.cc/150?img=1"
-				/>
-				<Avatar
-					name="Bob Wilson"
-					subheading="Manager"
-					size="lg"
-					colorIndex={2}
-				/>
-				<Avatar
-					name="Alice Brown"
-					subheading="CEO"
-					size="xl"
-					colorIndex={3}
-					image="https://i.pravatar.cc/150?img=2"
-				/>
-			</div>
-		</div>
+                <!-- Badge with Content -->
+                <Badge 
+                    text="Warning" 
+                    leftIcon={ExclamationCircleSolid}
+                    content="This is a detailed explanation"
+                    colorIndex={1}
+                    size="lg"
+                />
+            </div>
+        </div>
 
-		<!-- Color Variants -->
-		<div class="mb-8">
-			<h3 class="mb-4 text-xl font-bold dark:text-white">Color Variants</h3>
-			<div class="flex items-center flex-nowrap gap-8 overflow-x-auto pb-4">
-				{#each Array(6) as _, i}
-					<Avatar
-						name={`User ${i + 1}`}
-						size="md"
-						colorIndex={i}
-					/>
-				{/each}
-			</div>
-		</div>
+        <!-- Skill Badge Showcase -->
+        <div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
+            <h2 class="mb-4 text-2xl font-bold dark:text-white">Skill Badges</h2>
+            <div class="flex flex-wrap items-start gap-4">
+                {#each [
+                    { name: "Programming", icon: CodeBranchSolid, prof: 95, color: 0 },
+                    { name: "Machine Learning", icon: BrainSolid, prof: 85, color: 1, text: "Advanced" },
+                    { name: "UI Design", icon: PenSolid, prof: 75, color: 2, size: "sm" },
+                    { name: "Backend", icon: ServerSolid, prof: 90, color: 3, text: "Expert" },
+                    { name: "Databases", icon: DatabaseSolid, prof: 80, color: 4 },
+                    { name: "Cloud Services", icon: CloudArrowUpSolid, prof: 70, color: 5, text: "Intermediate" }
+                ] as skill}
+                    <SkillBadge
+                        skill={skill.name}
+                        proficiency={skill.prof}
+                        proficiencyText={skill.text}
+                        icon={skill.icon}
+                        colorIndex={skill.color}
+                        
+                    />
+                {/each}
+            </div>
+        </div>
 
-		<!-- Direction Variants -->
-		<div class="mb-8">
-			<h3 class="mb-4 text-xl font-bold dark:text-white">Direction Variants</h3>
-			<div class="grid grid-cols-2 gap-8 md:grid-cols-4">
-				<Avatar
-					name="Up Direction"
-					subheading="Points Up"
-					direction="up"
-					colorIndex={0}
-				/>
-				<Avatar
-					name="Down Direction"
-					subheading="Points Down"
-					direction="down"
-					colorIndex={1}
-				/>
-				<Avatar
-					name="Left Direction"
-					subheading="Points Left"
-					direction="left"
-					colorIndex={2}
-				/>
-				<Avatar
-					name="Right Direction"
-					subheading="Points Right"
-					direction="right"
-					colorIndex={3}
-				/>
-			</div>
-		</div>
+        <!-- Avatar Showcase -->
+        <div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
+            <h2 class="mb-4 text-2xl font-bold dark:text-white">Avatar Variants</h2>
+            
+            <!-- Size Variants -->
+            <div class="mb-8">
+                <h3 class="mb-4 text-xl font-bold dark:text-white">Size Variants</h3>
+                <div class="flex items-center flex-nowrap gap-8 overflow-x-auto pb-4">
+                    <Avatar
+                        name="John Doe"
+                        subheading="Developer"
+                        size="sm"
+                        colorIndex={0}
+                    />
+                    <Avatar
+                        name="Jane Smith"
+                        subheading="Designer"
+                        size="md"
+                        colorIndex={1}
+                        image="https://i.pravatar.cc/150?img=1"
+                    />
+                    <Avatar
+                        name="Bob Wilson"
+                        subheading="Manager"
+                        size="lg"
+                        colorIndex={2}
+                    />
+                    <Avatar
+                        name="Alice Brown"
+                        subheading="CEO"
+                        size="xl"
+                        colorIndex={3}
+                        image="https://i.pravatar.cc/150?img=2"
+                    />
+                </div>
+            </div>
 
-		<!-- Rounded vs Square -->
-		<div class="mb-8">
-			<h3 class="mb-4 text-xl font-bold dark:text-white">Shape Variants</h3>
-			<div class="flex gap-8">
-				<Avatar
-					name="Rounded Avatar"
-					subheading="Default rounded"
-					colorIndex={4}
-					rounded={true}
-				/>
-				<Avatar
-					name="Square Avatar"
-					subheading="No rounding"
-					colorIndex={5}
-					rounded={false}
-				/>
-			</div>
-		</div>
-	</div>
+            <!-- Color Variants -->
+            <div class="mb-8">
+                <h3 class="mb-4 text-xl font-bold dark:text-white">Color Variants</h3>
+                <div class="flex items-center flex-nowrap gap-8 overflow-x-auto pb-4">
+                    {#each Array(6) as _, i}
+                        <Avatar
+                            name={`User ${i + 1}`}
+                            size="md"
+                            colorIndex={i}
+                        />
+                    {/each}
+                </div>
+            </div>
 
-	<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-		<!-- Basic Card -->
-		<Card class="neo-brutalist-card {getColor(0)}">
-			<h5 class="mb-2 text-2xl font-bold text-black dark:text-white">{m.card_simple_title()}</h5>
-			<p class="font-normal text-black dark:text-white">{m.card_simple_content()}</p>
-		</Card>
+            <!-- Direction Variants -->
+            <div class="mb-8">
+                <h3 class="mb-4 text-xl font-bold dark:text-white">Direction Variants</h3>
+                <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+                    <Avatar
+                        name="Up Direction"
+                        subheading="Points Up"
+                        direction="up"
+                        colorIndex={0}
+                    />
+                    <Avatar
+                        name="Down Direction"
+                        subheading="Points Down"
+                        direction="down"
+                        colorIndex={1}
+                    />
+                    <Avatar
+                        name="Left Direction"
+                        subheading="Points Left"
+                        direction="left"
+                        colorIndex={2}
+                    />
+                    <Avatar
+                        name="Right Direction"
+                        subheading="Points Right"
+                        direction="right"
+                        colorIndex={3}
+                    />
+                </div>
+            </div>
 
-		<!-- Card with Image -->
-		<Card
-			class="neo-brutalist-card {getColor(1)}"
-			img="https://via.assets.so/img.jpg?w=400&h=150&tc=blue&bg=#cecece"
-		>
-			<h5 class="mb-2 text-2xl font-bold text-black dark:text-white">{m.card_image_title()}</h5>
-			<p class="mb-3 font-normal text-black dark:text-white">{m.card_image_content()}</p>
-			<div class="flex gap-2">
-				<Button colorIndex={2}>Click Me</Button>
-				<Button variant="outline">Cancel</Button>
-			</div>
-		</Card>
+            <!-- Rounded vs Square -->
+            <div class="mb-8">
+                <h3 class="mb-4 text-xl font-bold dark:text-white">Shape Variants</h3>
+                <div class="flex gap-8">
+                    <Avatar
+                        name="Rounded Avatar"
+                        subheading="Default rounded"
+                        colorIndex={4}
+                        rounded={true}
+                    />
+                    <Avatar
+                        name="Square Avatar"
+                        subheading="No rounding"
+                        colorIndex={5}
+                        rounded={false}
+                    />
+                </div>
+            </div>
+        </div>
 
-		<!-- Content-only Card -->
-		<Card class="neo-brutalist-card {getColor(3)}">
-			<p class="font-normal text-black dark:text-white">
-				This card only has content, no heading or image.
-			</p>
-			<div class="mt-4">
-				<Button rounded>OK</Button>
-			</div>
-		</Card>
-	</div>
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Basic Card -->
+            <Card class="neo-brutalist-card {getColor(0)}">
+                <h5 class="mb-2 text-2xl font-bold text-black dark:text-white">{m.card_simple_title()}</h5>
+                <p class="font-normal text-black dark:text-white">{m.card_simple_content()}</p>
+            </Card>
 
-	<!-- Footer Showcase -->
-	<div class="mt-16">
-		<h2 class="mb-4 text-2xl font-bold dark:text-white">Footer Component</h2>
-		<Footer sections={footerSections} colorIndex={0} />
-	</div>
+            <!-- Card with Image -->
+            <Card
+                class="neo-brutalist-card {getColor(1)}"
+                img="https://via.assets.so/img.jpg?w=400&h=150&tc=blue&bg=#cecece"
+            >
+                <h5 class="mb-2 text-2xl font-bold text-black dark:text-white">{m.card_image_title()}</h5>
+                <p class="mb-3 font-normal text-black dark:text-white">{m.card_image_content()}</p>
+                <div class="flex gap-2">
+                    <Button colorIndex={2}>Click Me</Button>
+                    <Button variant="outline">Cancel</Button>
+                </div>
+            </Card>
+
+            <!-- Content-only Card -->
+            <Card class="neo-brutalist-card {getColor(3)}">
+                <p class="font-normal text-black dark:text-white">
+                    This card only has content, no heading or image.
+                </p>
+                <div class="mt-4">
+                    <Button rounded>OK</Button>
+                </div>
+            </Card>
+        </div>
+
+        <!-- Enhanced Toast Showcase -->
+        <div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
+            <h2 class="mb-4 text-2xl font-bold dark:text-white">Toast Notifications</h2>
+            
+            <!-- Position Controls -->
+            <div class="mb-6">
+                <h3 class="mb-2 text-lg font-bold dark:text-white">Toast Position</h3>
+                <div class="flex flex-wrap gap-2">
+                    <Button 
+                        size="sm" 
+                        colorIndex={toastPosition === 'top-left' ? 2 : 0}
+                        onclick={() => updateToastPosition('top-left')}
+                    >
+                        Top Left
+                    </Button>
+                    <Button 
+                        size="sm" 
+                        colorIndex={toastPosition === 'top-right' ? 2 : 0}
+                        onclick={() => updateToastPosition('top-right')}
+                    >
+                        Top Right
+                    </Button>
+                    <Button 
+                        size="sm" 
+                        colorIndex={toastPosition === 'bottom-left' ? 2 : 0}
+                        onclick={() => updateToastPosition('bottom-left')}
+                    >
+                        Bottom Left
+                    </Button>
+                    <Button 
+                        size="sm" 
+                        colorIndex={toastPosition === 'bottom-right' ? 2 : 0}
+                        onclick={() => updateToastPosition('bottom-right')}
+                    >
+                        Bottom Right
+                    </Button>
+                </div>
+            </div>
+        
+            <!-- Basic Types -->
+            <div class="mb-6">
+                <h3 class="mb-2 text-lg font-bold dark:text-white">Basic Types</h3>
+                <div class="flex flex-wrap gap-4">
+                    <Button colorIndex={0} onclick={() => showToast('info')}>Info</Button>
+                    <Button colorIndex={1} onclick={() => showToast('attention')}>Attention</Button>
+                    <Button colorIndex={2} onclick={() => showToast('success')}>Success</Button>
+                    <Button colorIndex={3} onclick={() => showToast('warning')}>Warning</Button>
+                    <Button colorIndex={4} onclick={() => showToast('error')}>Error</Button>
+                </div>
+            </div>
+        
+            <!-- Duration Examples -->
+            <div class="mb-6">
+                <h3 class="mb-2 text-lg font-bold dark:text-white">Duration Examples</h3>
+                <div class="flex flex-wrap gap-4">
+                    <Button colorIndex={2} onclick={showTimedToast}>10s Duration</Button>
+                    <Button colorIndex={3} onclick={showInfiniteToast}>Infinite Duration</Button>
+                    <Button colorIndex={5} onclick={showPromiseToast}>Promise Toast</Button>
+                </div>
+            </div>
+        
+            <!-- Advanced Examples -->
+            <div class="mb-6">
+                <h3 class="mb-2 text-lg font-bold dark:text-white">Advanced Examples</h3>
+                <div class="flex flex-wrap gap-4">
+                    <Button variant="outline" onclick={showComplexToast}>With Callbacks</Button>
+                    <Button 
+                        colorIndex={4} 
+                        onclick={() => {
+                            toast.error('Multiple\nLine\nContent', { duration: 5000 })
+                        }}
+                    >
+                        Multiline
+                    </Button>
+                </div>
+            </div>
+
+            <!-- Variants -->
+            <div class="mb-6">
+                <h3 class="mb-2 text-lg font-bold dark:text-white">Variants</h3>
+                <div class="flex flex-wrap gap-4">
+                    <Button colorIndex={0} onclick={() => showToast('info', { duration: 3000 })}>
+                        Quick Info (3s)
+                    </Button>
+                    <Button colorIndex={1} onclick={() => showToast('attention', { closable: false })}>
+                        Non-closable
+                    </Button>
+                    <Button colorIndex={2} onclick={() => showToast('success', { infinite: true })}>
+                        Infinite
+                    </Button>
+                    <Button colorIndex={3} onclick={() => showToast('warning', { duration: 8000 })}>
+                        Long Warning (8s)
+                    </Button>
+                    <Button colorIndex={4} onclick={showRichToast}>
+                        Rich Content
+                    </Button>
+                    <Button colorIndex={5} onclick={showStackedToast}>
+                        Stacked Toasts
+                    </Button>
+                </div>
+            </div>
+
+            <!-- Color Examples -->
+            <div class="mb-6">
+                <h3 class="mb-2 text-lg font-bold dark:text-white">Color Variants</h3>
+                <div class="flex flex-wrap gap-4">
+                    <Button colorIndex={5} onclick={showColorVariants}>
+                        Show Color Variants
+                    </Button>
+                    <Button 
+                        colorIndex={2} 
+                        onclick={() => showToast('success', { colorIndex: 4 })}
+                    >
+                        Success with Custom Color
+                    </Button>
+                    <Button 
+                        colorIndex={3} 
+                        onclick={() => showToast('error', { colorIndex: 1 })}
+                    >
+                        Error with Custom Color
+                    </Button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Showcase -->
+        <div class="mt-16">
+            <h2 class="mb-4 text-2xl font-bold dark:text-white">Footer Component</h2>
+            <Footer sections={footerSections} colorIndex={0} />
+        </div>
+    </div>
 </div>

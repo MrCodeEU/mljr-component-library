@@ -22,7 +22,7 @@ TODO: Add Git workflow to build npm package and publisch on main push
 - [x] Buttons
 - [x] Toggle
 - [ ] Form Elements (Inputs, Files Uploads, Date Pickers etc)
-- [ ] Avatars
+- [X] Avatars
 - [x] Badges
 - [X] Image Carousel
 - [X] Progress Bars
