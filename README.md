@@ -15,6 +15,7 @@ TODO: Add Git workflow to build npm package and publisch on main push
 - [x] Language Toggle (Using Paraglide)
 - [x] Toast
 - [x] Skill Badges
+- [ ] Idea: A Forms Componet that is JSON Configurable?
 - [ ] ...
 
 # Elements
@@ -22,6 +23,17 @@ TODO: Add Git workflow to build npm package and publisch on main push
 - [x] Buttons
 - [x] Toggle
 - [ ] Form Elements (Inputs, Files Uploads, Date Pickers etc)
+    - [X] Text Input
+    - [X] Range Slider (with dual handle support)
+    - [ ] Number selector
+    - [ ] Date Picker (with time support)
+    - [ ] File Upload
+    - [ ] Radio Buttons
+    - [ ] Checkboxes
+    - [ ] Dropdown
+    - [ ] Text Area
+    - [ ] Color Picker
+    - [ ] ...?
 - [X] Avatars
 - [x] Badges
 - [X] Image Carousel

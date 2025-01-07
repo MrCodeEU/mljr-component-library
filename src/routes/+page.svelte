@@ -51,6 +51,7 @@
         EyeSlashSolid,
         EyeSolid
     } from 'flowbite-svelte-icons';
+    import RangeSlider from '$lib/UI/Forms/RangeSlider.svelte';
 
 	let navbarProps = {
 		logos: {
@@ -896,6 +897,107 @@
                             icon={UserSolid}
                         />
                     {/each}
+                </div>
+            </div>
+        </div>
+
+        <!-- Range Slider Showcase -->
+        <div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
+            <h2 class="mb-4 text-2xl font-bold dark:text-white">Range Sliders</h2>
+            
+            <!-- Basic Sliders -->
+            <div class="mb-8">
+                <h3 class="mb-4 text-lg font-bold dark:text-white">Basic Sliders</h3>
+                <div class="space-y-8">
+                    <RangeSlider 
+                        min={0} 
+                        max={100} 
+                        colorIndex={0}
+                    />
+                    
+                    <RangeSlider 
+                        min={0} 
+                        max={100} 
+                        dual={true}
+                        colorIndex={1}
+                    />
+                </div>
+            </div>
+
+            <!-- Slider with Ticks -->
+            <div class="mb-8">
+                <h3 class="mb-4 text-lg font-bold dark:text-white">With Ticks</h3>
+                <div class="space-y-8">
+                    <RangeSlider 
+                        min={0} 
+                        max={100} 
+                        showTicks={true}
+                        tickInterval={10}
+                        colorIndex={2}
+                    />
+                </div>
+            </div>
+
+            <!-- Label Positions -->
+            <div class="mb-8">
+                <h3 class="mb-4 text-lg font-bold dark:text-white">Label Positions</h3>
+                <div class="space-y-8">
+                    <RangeSlider 
+                        min={0} 
+                        max={100} 
+                        labelPosition="top"
+                        colorIndex={3}
+                    />
+                    
+                    <RangeSlider 
+                        min={0} 
+                        max={100} 
+                        labelPosition="handle"
+                        colorIndex={4}
+                    />
+                    
+                    <RangeSlider 
+                        min={0} 
+                        max={100} 
+                        labelPosition="bottom"
+                        colorIndex={5}
+                    />
+                </div>
+            </div>
+
+            <!-- Steps and Floating Point -->
+            <div class="mb-8">
+                <h3 class="mb-4 text-lg font-bold dark:text-white">Steps and Floating Point</h3>
+                <div class="space-y-8">
+                    <RangeSlider 
+                        min={0} 
+                        max={100} 
+                        step={10}
+                        float={false}
+                        showTicks={true}
+                        colorIndex={0}
+                    />
+                    
+                    <RangeSlider 
+                        min={0} 
+                        max={1} 
+                        step={0.1}
+                        float={true}
+                        colorIndex={1}
+                    />
+                </div>
+            </div>
+
+            <!-- Disabled State -->
+            <div class="mb-8">
+                <h3 class="mb-4 text-lg font-bold dark:text-white">Disabled State</h3>
+                <div class="space-y-8">
+                    <RangeSlider 
+                        min={0} 
+                        max={100} 
+                        disabled={true}
+                        colorIndex={2}
+                    />
                 </div>
             </div>
         </div>
