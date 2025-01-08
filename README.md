@@ -25,10 +25,10 @@ TODO: Add Git workflow to build npm package and publisch on main push
 - [ ] Form Elements (Inputs, Files Uploads, Date Pickers etc)
     - [X] Text Input
     - [X] Range Slider (with dual handle support)
-    - [ ] Number selector
+    - [X] Number selector
     - [ ] Date Picker (with time support)
     - [ ] File Upload
-    - [ ] Radio Buttons
+    - [x] Radio Buttons
     - [ ] Checkboxes
     - [ ] Dropdown
     - [ ] Text Area

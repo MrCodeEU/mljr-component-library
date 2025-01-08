@@ -28,7 +28,8 @@
         showLabels = true,
         labelPosition = 'top',
         disabled = false,
-        colorIndex = 0
+        colorIndex = 0,
+        value = $bindable(dual ? [min, max] : min)
     } = $props<Props>();
 
     // State
