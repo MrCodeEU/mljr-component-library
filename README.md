@@ -29,7 +29,7 @@ TODO: Add Git workflow to build npm package and publisch on main push
     - [ ] Date Picker (with time support)
     - [ ] File Upload
     - [x] Radio Buttons
-    - [ ] Checkboxes
+    - [x] Checkboxes
     - [ ] Dropdown
     - [ ] Text Area
     - [ ] Color Picker

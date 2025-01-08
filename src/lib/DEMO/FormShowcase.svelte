@@ -3,6 +3,7 @@
     import NumberInput from '$lib/UI/Forms/NumberInput.svelte';
     import RangeSlider from '$lib/UI/Forms/RangeSlider.svelte';
     import RadioButton from '$lib/UI/Forms/RadioButton.svelte';
+    import Checkbox from '$lib/UI/Forms/checkbox.svelte';
     import { SearchSolid, UserSolid, EnvelopeSolid, EyeSolid, EyeSlashSolid } from 'flowbite-svelte-icons';
 
     let showPassword = $state(false);
@@ -260,6 +261,53 @@
                     { label: 'Disabled 1', value: '1' },
                     { label: 'Disabled 2', value: '2' }
                 ]}
+                colorIndex={3}
+            />
+        </div>
+    </div>
+
+    <!-- Checkboxes -->
+    <div class="mb-8">
+        <h3 class="mb-4 text-lg font-bold dark:text-white">Checkboxes</h3>
+        <div class="space-y-4">
+            <Checkbox
+                label="Basic Checkbox"
+                colorIndex={0}
+            />
+            
+            <div>
+                <Checkbox
+                    label="Inline Checkboxes"
+                    inline
+                    colorIndex={1}
+                />
+                <Checkbox
+                    label="Second Option"
+                    inline
+                    colorIndex={1}
+                />
+                <Checkbox
+                    label="Third Option"
+                    inline
+                    colorIndex={1}
+                />
+            </div>
+
+            <Checkbox
+                label="With Helper Text"
+                helper="This is some additional information"
+                colorIndex={2}
+            />
+
+            <Checkbox
+                label="With Error"
+                error="This field is required"
+                colorIndex={4}
+            />
+
+            <Checkbox
+                label="Disabled Checkbox"
+                disabled
                 colorIndex={3}
             />
         </div>

@@ -137,4 +137,20 @@
   .neo-brutalist-slider .slider-track {
     @apply shadow-[4px_4px_0px_0px_rgba(0,0,0,1)];
   }
+
+  .neo-brutalist-checkbox {
+    @apply h-5 w-5 rounded-none
+    border-2 border-black
+    shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
+    hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]
+    focus:shadow-none
+    focus:translate-x-[2px] focus:translate-y-[2px]
+    transition-all;
+  }
+
+  .neo-brutalist-checkbox.checkbox-error {
+    @apply !border-red-500 dark:!border-red-700
+    !shadow-[2px_2px_0px_0px_theme(colors.red.500)]
+    dark:!shadow-[2px_2px_0px_0px_theme(colors.red.700)];
+  }
 }
