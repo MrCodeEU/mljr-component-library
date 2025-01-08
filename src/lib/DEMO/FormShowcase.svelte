@@ -4,6 +4,7 @@
     import RangeSlider from '$lib/UI/Forms/RangeSlider.svelte';
     import RadioButton from '$lib/UI/Forms/RadioButton.svelte';
     import Checkbox from '$lib/UI/Forms/checkbox.svelte';
+    import DatePicker from '$lib/UI/Forms/DatePicker.svelte';
     import { SearchSolid, UserSolid, EnvelopeSolid, EyeSolid, EyeSlashSolid } from 'flowbite-svelte-icons';
 
     let showPassword = $state(false);
@@ -308,6 +309,84 @@
             <Checkbox
                 label="Disabled Checkbox"
                 disabled
+                colorIndex={3}
+            />
+        </div>
+    </div>
+
+    <!-- Add this new section before the closing div -->
+    <div class="mb-8">
+        <h3 class="mb-4 text-lg font-bold dark:text-white">Date Pickers</h3>
+        <div class="grid gap-6 md:grid-cols-2">
+            <DatePicker
+                label="Basic Date Picker"
+                colorIndex={0}
+            />
+
+            <DatePicker
+                label="Date & Time (24h)"
+                mode="datetime"
+                timeFormat="24h"
+                colorIndex={1}
+            />
+
+            <DatePicker
+                label="Date & Time (12h)"
+                mode="datetime"
+                timeFormat="12h"
+                format="MM/dd/yyyy hh:mm aa"
+                colorIndex={2}
+            />
+
+            <DatePicker
+                label="Week starts Monday"
+                startOfWeek={1}
+                colorIndex={3}
+            />
+
+            <DatePicker
+                label="With Min/Max Date"
+                min={new Date(2024, 0, 1)}
+                max={new Date(2024, 11, 31)}
+                helper="Select a date in 2024"
+                colorIndex={4}
+            />
+
+            <DatePicker
+                label="Small Size"
+                size="sm"
+                colorIndex={5}
+            />
+
+            <DatePicker
+                label="Large Size"
+                size="lg"
+                colorIndex={0}
+            />
+
+            <DatePicker
+                label="Custom Format"
+                format="yyyy-MM-dd"
+                colorIndex={1}
+            />
+
+            <DatePicker
+                label="With Error"
+                error="Please select a valid date"
+                colorIndex={4}
+            />
+
+            <DatePicker
+                label="Success State"
+                success="Date is valid!"
+                value={new Date()}
+                colorIndex={2}
+            />
+
+            <DatePicker
+                label="Disabled Picker"
+                disabled
+                value={new Date()}
                 colorIndex={3}
             />
         </div>

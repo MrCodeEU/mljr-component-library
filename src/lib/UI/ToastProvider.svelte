@@ -5,4 +5,12 @@
     export let position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' = 'top-right';
 </script>
 
-<Toasts {position} component={Toast} />
+<div class="fixed inset-0 pointer-events-none z-50">
+    <Toasts {position} component={Toast} />
+</div>
+
+<style>
+    :global(.svoast-container) {
+        pointer-events: auto;
+    }
+</style>

@@ -15,6 +15,9 @@
 	import ToastShowcase from '$lib/DEMO/ToastShowcase.svelte';
 	import FormShowcase from '$lib/DEMO/FormShowcase.svelte';
 	import FooterShowcase from '$lib/DEMO/FooterShowcase.svelte';
+    import TabGroup from '$lib/UI/TabGroup.svelte';
+    import TabItem from '$lib/UI/TabItem.svelte';
+    import ToastProvider from '$lib/UI/ToastProvider.svelte';
 
 	let navbarProps = {
 		logos: {
@@ -30,9 +33,19 @@
 			{ href: '/sudoku/hard', text: 'Hard Sudoku' }
 		]
 	};
+
+    const tabs = [
+        { value: 'colors', title: 'Colors', colorIndex: 0 },
+        { value: 'buttons', title: 'Buttons', colorIndex: 1 },
+        { value: 'inputs', title: 'Inputs', colorIndex: 2 },
+        { value: 'feedback', title: 'Feedback', colorIndex: 3 },
+        { value: 'content', title: 'Content', colorIndex: 4 }
+    ];
+
+    let activeTab = tabs[0].value;
 </script>
 
-<div class="relative">
+<div class="relative min-h-screen">
 	<Background
 		colorIndex={1}
 		secondaryColorIndex={2}
@@ -45,19 +58,47 @@
 	/>
 
 	<Navbar {...navbarProps} />
+    
+    <ToastProvider />
 
-	<div class="container mx-auto p-8">
-		<ColorShowcase />
-		<ButtonShowcase />
-		<ToggleShowcase />
-		<ProgressBarShowcase />
-		<ImageSliderShowcase />
-		<BadgeShowcase />
-		<SkillBadgeShowcase />
-		<AvatarShowcase />
-		<CardShowcase />
-		<ToastShowcase />
-		<FormShowcase />
-		<FooterShowcase />
-	</div>
+	<main class="container mx-auto p-8">
+        <TabGroup {tabs} bind:activeTab>
+            <TabItem value="colors" isActive={activeTab === 'colors'}>
+                <div class="neo-brutalist-container p-4">
+                    <ColorShowcase />
+                </div>
+            </TabItem>
+
+            <TabItem value="buttons" isActive={activeTab === 'buttons'}>
+                <div class="neo-brutalist-container p-4">
+                    <ButtonShowcase />
+                    <ToggleShowcase />
+                </div>
+            </TabItem>
+
+            <TabItem value="inputs" isActive={activeTab === 'inputs'}>
+                <div class="neo-brutalist-container p-4">
+                    <FormShowcase />
+                    <ProgressBarShowcase />
+                    <ImageSliderShowcase />
+                </div>
+            </TabItem>
+
+            <TabItem value="feedback" isActive={activeTab === 'feedback'}>
+                <div class="neo-brutalist-container p-4">
+                    <BadgeShowcase />
+                    <SkillBadgeShowcase />
+                    <ToastShowcase />
+                </div>
+            </TabItem>
+
+            <TabItem value="content" isActive={activeTab === 'content'}>
+                <div class="neo-brutalist-container p-4">
+                    <AvatarShowcase />
+                    <CardShowcase />
+                </div>
+            </TabItem>
+        </TabGroup>
+    </main>
+    <FooterShowcase />
 </div>

@@ -1,9 +1,6 @@
 <script lang="ts">
     import Button from '$lib/UI/Button.svelte';
-    import ToastProvider from '$lib/UI/ToastProvider.svelte';
     import { toast } from 'svoast';
-
-    let toastPosition = $state('top-right');
 
     const typeColorMap = {
         info: 0,
@@ -83,19 +80,8 @@
 <div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
     <h2 class="mb-4 text-2xl font-bold dark:text-white">Toast Notifications</h2>
 
-    <ToastProvider position={toastPosition} />
+    <!-- Remove ToastProvider as it's now in the root layout -->
     
-    <!-- Position Controls -->
-    <div class="mb-6">
-        <h3 class="mb-2 text-lg font-bold dark:text-white">Position</h3>
-        <div class="flex flex-wrap gap-4">
-            <Button colorIndex={0} onclick={() => toastPosition = 'top-left'}>Top Left</Button>
-            <Button colorIndex={0} onclick={() => toastPosition = 'top-right'}>Top Right</Button>
-            <Button colorIndex={0} onclick={() => toastPosition = 'bottom-left'}>Bottom Left</Button>
-            <Button colorIndex={0} onclick={() => toastPosition = 'bottom-right'}>Bottom Right</Button>
-        </div>
-    </div>
-
     <!-- Basic Types -->
     <div class="mb-6">
         <h3 class="mb-2 text-lg font-bold dark:text-white">Basic Types</h3>
