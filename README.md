@@ -22,12 +22,12 @@ TODO: Add Git workflow to build npm package and publisch on main push
 - [x] Cards
 - [x] Buttons
 - [x] Toggle
-- [ ] Tab Groups
+- [X] Tab Groups
 - [ ] Form Elements (Inputs, Files Uploads, Date Pickers etc)
     - [X] Text Input
     - [X] Range Slider (with dual handle support)
     - [X] Number selector
-    - [ ] Date Picker (with time support)
+    - [x] Date Picker (works but not goos. Might replace with premade component and add styling)
     - [ ] File Upload
     - [x] Radio Buttons
     - [x] Checkboxes
