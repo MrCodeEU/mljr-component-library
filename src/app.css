@@ -8,11 +8,16 @@
     --svoast-gap: 16px;
     --svoast-max-width: 420px;
     --svoast-font-family: ui-monospace, monospace;
+    --color-0: theme(colors.yellow.300);
+    --color-1: theme(colors.red.400);
+    --color-2: theme(colors.blue.400);
+    --color-3: theme(colors.green.400);
+    --color-4: theme(colors.pink.400);
 }
 
 @layer components {
   .neo-brutalist-container {
-    @apply bg-yellow-300 dark:bg-purple-800 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition-all !important;
+    @apply bg-yellow-300 dark:bg-purple-800 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-all !important;
   }
 
   .neo-brutalist-button {
@@ -155,18 +160,35 @@
   }
 
   .neo-brutalist-tab {
-    @apply px-4 py-2 font-mono font-bold
-    border-2 border-black
+    @apply px-6 py-3 font-mono font-bold
+    border-4 border-black
     shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]
-    hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none
-    transition-all whitespace-nowrap;
+    hover:translate-x-[2px] hover:translate-y-[2px] 
+    hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
+    transition-all duration-200 whitespace-nowrap;
   }
 
   .neo-brutalist-tab.active {
-    @apply translate-x-[3px] translate-y-[3px] shadow-none;
+    @apply shadow-none translate-x-[4px] translate-y-[4px]
+    brightness-100;
+    @apply hover:translate-x-[4px] hover:translate-y-[4px] 
+    hover:shadow-none;
   }
 
+  /* Apply hover color to active state */
+  .neo-brutalist-tab.active {
+    @apply bg-yellow-400 dark:bg-purple-800;
+  }
+  .neo-brutalist-tab.active.bg-yellow-300 { @apply bg-yellow-400 dark:bg-purple-800; }
+  .neo-brutalist-tab.active.bg-red-400 { @apply bg-red-500 dark:bg-red-800; }
+  .neo-brutalist-tab.active.bg-blue-400 { @apply bg-blue-500 dark:bg-blue-800; }
+  .neo-brutalist-tab.active.bg-green-400 { @apply bg-green-500 dark:bg-green-800; }
+  .neo-brutalist-tab.active.bg-pink-400 { @apply bg-pink-500 dark:bg-pink-800; }
+  .neo-brutalist-tab.active.bg-orange-400 { @apply bg-orange-500 dark:bg-orange-600; }
+
   .neo-brutalist-tab.disabled {
-    @apply opacity-50 cursor-not-allowed hover:translate-x-0 hover:translate-y-0 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)];
+    @apply opacity-50 cursor-not-allowed 
+    hover:translate-x-0 hover:translate-y-0 
+    hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)];
   }
 }

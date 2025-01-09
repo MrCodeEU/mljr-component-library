@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { getColor } from '$lib/utils/colors';
     export let activeTab: string;
     export let tabs: Array<{
         value: string;
@@ -12,18 +13,18 @@
     <div class="tab-list" role="tablist">
         {#each tabs as tab}
             <button
-                class="tab-button"
+                class="neo-brutalist-tab {getColor(tab.colorIndex)}"
                 class:active={activeTab === tab.value}
+                class:disabled={tab.disabled}
                 disabled={tab.disabled}
                 on:click={() => activeTab = tab.value}
-                style:--tab-color="var(--color-{tab.colorIndex})"
             >
                 {tab.title}
             </button>
         {/each}
     </div>
 
-    <div class="tab-content">
+    <div class="tab-content neo-brutalist-container">
         <slot />
     </div>
 </div>
@@ -33,36 +34,27 @@
         width: 100%;
         display: flex;
         flex-direction: column;
+        gap: 0;
     }
 
     .tab-list {
         display: flex;
-        gap: 0;
-        background: white;
+        gap: 0.5rem;
         padding: 0;
+        margin-bottom: -2px;
     }
 
-    .tab-button {
-        padding: 0.75rem 1.5rem;
-        background: white;
-        border: 2px solid black;
-        border-bottom: none;
-        margin-right: -2px;
-        font-weight: bold;
-        cursor: pointer;
-        min-width: fit-content;
-    }
-
-    .tab-button.active {
-        background: var(--tab-color, #2563eb);
-        color: white;
-        position: relative;
+    :global(.neo-brutalist-tab) {
         z-index: 1;
     }
 
+    :global(.neo-brutalist-tab.active) {
+        transform: translateX(4px) translateY(4px);
+        filter: brightness(0.9);
+    }
+
     .tab-content {
-        border: 2px solid black;
-        background: white;
-        /* Remove the padding since we'll handle that in the neo-brutalist-container */
+        position: relative;
+        z-index: 0;
     }
 </style>
