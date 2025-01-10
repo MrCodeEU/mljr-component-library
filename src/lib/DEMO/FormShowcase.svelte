@@ -4,12 +4,10 @@
     import RangeSlider from '$lib/UI/Forms/RangeSlider.svelte';
     import RadioButton from '$lib/UI/Forms/RadioButton.svelte';
     import Checkbox from '$lib/UI/Forms/Checkbox.svelte';
-    import DatePicker from '$lib/UI/Forms/DatePicker/DatePicker.svelte';
+    import NeoDropdown from '$lib/UI/Forms/NeoDropdown.svelte';
     import { SearchSolid, UserSolid, EnvelopeSolid, EyeSolid, EyeSlashSolid } from 'flowbite-svelte-icons';
 
     let showPassword = $state(false);
-    let rangeValue = $state(50);
-    let dualRangeValues = $state([20, 80]);
 </script>
 
 <div class="mb-8 rounded-lg bg-gray-100 p-4 dark:bg-gray-800">
@@ -145,59 +143,74 @@
         </div>
     </div>
 
-    <!-- Range Sliders -->
+    <!-- Dropdowns -->
     <div class="mb-8">
-        <h3 class="mb-4 text-lg font-bold dark:text-white">Range Sliders</h3>
-        <div class="space-y-8">
-            <RangeSlider 
-                min={0} 
-                max={100} 
-                showTicks={true}
-                tickInterval={10}
-                colorIndex={2}
+        <h3 class="mb-4 text-lg font-bold dark:text-white">Dropdowns</h3>
+        <div class="grid gap-6 md:grid-cols-2">
+            <NeoDropdown
+                label="Basic Dropdown"
+                options={[
+                    { label: 'Option 1', value: '1' },
+                    { label: 'Option 2', value: '2' },
+                    { label: 'Option 3', value: '3' }
+                ]}
+                colorIndex={0}
             />
             
-            <RangeSlider 
-                min={0} 
-                max={1} 
-                step={0.1}
-                float={true}
-                colorIndex={3}
-            />
-
-            <!-- Add these new examples -->
-            <RangeSlider 
-                min={0} 
-                max={100} 
-                value={rangeValue}
-                labelPosition="handle"
+            <NeoDropdown
+                label="Searchable Dropdown"
+                options={[
+                    { label: 'Apple', value: 'apple' },
+                    { label: 'Banana', value: 'banana' },
+                    { label: 'Cherry', value: 'cherry' },
+                    { label: 'Date', value: 'date' },
+                    { label: 'Elderberry', value: 'elderberry' }
+                ]}
+                searchable={true}
                 colorIndex={1}
             />
             
-            <RangeSlider 
-                dual={true}
-                min={0} 
-                max={100} 
-                value={dualRangeValues}
-                showTicks={true}
-                tickInterval={20}
-                colorIndex={4}
+            <NeoDropdown
+                label="Multiple Selection"
+                options={[
+                    { label: 'React', value: 'react' },
+                    { label: 'Vue', value: 'vue' },
+                    { label: 'Svelte', value: 'svelte' },
+                    { label: 'Angular', value: 'angular' }
+                ]}
+                multiple={true}
+                colorIndex={2}
             />
-
-            <RangeSlider 
-                min={0} 
-                max={5} 
-                step={0.5}
-                float={true}
-                labelPosition="bottom"
+            
+            <NeoDropdown
+                label="With Disabled Options"
+                options={[
+                    { label: 'Available', value: 'available' },
+                    { label: 'Sold Out', value: 'sold-out', disabled: true },
+                    { label: 'In Stock', value: 'in-stock' },
+                    { label: 'Discontinued', value: 'discontinued', disabled: true }
+                ]}
                 colorIndex={3}
             />
 
-            <RangeSlider
-                min={0}
-                max={100}
-                disabled
-                colorIndex={2}
+            <NeoDropdown
+                label="With Error"
+                options={[
+                    { label: 'Option A', value: 'a' },
+                    { label: 'Option B', value: 'b' }
+                ]}
+                error="Please select an option"
+                colorIndex={4}
+            />
+
+            <NeoDropdown
+                label="Disabled Dropdown"
+                options={[
+                    { label: 'Option 1', value: '1' },
+                    { label: 'Option 2', value: '2' }
+                ]}
+                disabled={true}
+                colorIndex={5}
             />
         </div>
     </div>
@@ -308,83 +321,6 @@
 
             <Checkbox
                 label="Disabled Checkbox"
-                disabled
-                colorIndex={3}
-            />
-        </div>
-    </div>
-
-    <!-- DatePicker section -->
-    <div class="mb-8">
-        <h3 class="mb-4 text-lg font-bold dark:text-white">Date Pickers</h3>
-        <div class="grid gap-6 md:grid-cols-2">
-            <DatePicker
-                label="Basic Date"
-                mode="date"
-                colorIndex={0}
-            />
-
-            <DatePicker
-                label="Time Only"
-                mode="time"
-                colorIndex={1}
-            />
-
-            <DatePicker
-                label="Date & Time"
-                mode="datetime"
-                timeFormat="24h"
-                colorIndex={2}
-            />
-
-            <DatePicker
-                label="12-hour Time"
-                mode="datetime"
-                timeFormat="12h"
-                format="MM/dd/yyyy hh:mm aa"
-                colorIndex={3}
-            />
-
-            <DatePicker
-                label="Constrained Range"
-                min={new Date(2024, 0, 1)}
-                max={new Date(2024, 11, 31)}
-                helper="Select a date in 2024"
-                colorIndex={4}
-            />
-
-            <DatePicker
-                label="Week starts Monday"
-                startOfWeek={1}
-                colorIndex={0}
-            />
-
-            <DatePicker
-                label="Small Size"
-                size="sm"
-                colorIndex={1}
-            />
-
-            <DatePicker
-                label="Large Size"
-                size="lg"
-                colorIndex={2}
-            />
-
-            <DatePicker
-                label="With Error"
-                error="Please select a valid date"
-                colorIndex={4}
-            />
-
-            <DatePicker
-                label="With Success"
-                success="Date is valid!"
-                colorIndex={2}
-            />
-
-            <DatePicker
-                label="Disabled"
                 disabled
                 colorIndex={3}
             />

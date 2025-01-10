@@ -18,6 +18,7 @@
     import TabGroup from '$lib/UI/TabGroup.svelte';
     import TabItem from '$lib/UI/TabItem.svelte';
     import ToastProvider from '$lib/UI/ToastProvider.svelte';
+    import AdvancedInputShowcase from '$lib/DEMO/AdvancedInputShowcase.svelte';
 
 	let navbarProps = {
 		logos: {
@@ -38,8 +39,9 @@
         { value: 'colors', title: 'Colors', colorIndex: 0 },
         { value: 'buttons', title: 'Buttons', colorIndex: 1 },
         { value: 'inputs', title: 'Inputs', colorIndex: 2 },
-        { value: 'feedback', title: 'Feedback', colorIndex: 3 },
-        { value: 'content', title: 'Content', colorIndex: 4 }
+        { value: 'advancedInputs', title: 'Advanced Inputs', colorIndex: 3 },
+        { value: 'feedback', title: 'Feedback', colorIndex: 4 },
+        { value: 'content', title: 'Content', colorIndex: 5 }
     ];
 
     let activeTab = tabs[0].value;
@@ -81,6 +83,12 @@
                     <FormShowcase />
                     <ProgressBarShowcase />
                     <ImageSliderShowcase />
+                </div>
+            </TabItem>
+
+            <TabItem value="advancedInputs" isActive={activeTab === 'advancedInputs'}>
+                <div class="neo-brutalist-container p-4">
+                    <AdvancedInputShowcase />
                 </div>
             </TabItem>
 

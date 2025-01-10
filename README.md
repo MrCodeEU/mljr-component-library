@@ -27,7 +27,7 @@ TODO: Add Git workflow to build npm package and publisch on main push
     - [X] Text Input
     - [X] Range Slider (with dual handle support)
     - [X] Number selector
-    - [x] Date Picker (works but not goos. Might replace with premade component and add styling)
+    - [x] Date Picker (works but not good. Might replace with premade component and add styling)
     - [ ] File Upload
     - [x] Radio Buttons
     - [x] Checkboxes
