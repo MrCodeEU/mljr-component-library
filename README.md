@@ -28,11 +28,11 @@ TODO: Add Git workflow to build npm package and publisch on main push
     - [X] Range Slider (with dual handle support)
     - [X] Number selector
     - [x] Date Picker (works but not good. Might replace with premade component and add styling)
-    - [ ] File Upload
+    - [x] File Upload
     - [x] Radio Buttons
     - [x] Checkboxes
-    - [ ] Dropdown
-    - [ ] Text Area
+    - [x] Dropdown
+    - [x] Text Area
     - [ ] Color Picker
     - [ ] ...?
 - [X] Avatars

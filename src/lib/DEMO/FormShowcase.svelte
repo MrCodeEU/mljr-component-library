@@ -5,6 +5,8 @@
     import RadioButton from '$lib/UI/Forms/RadioButton.svelte';
     import Checkbox from '$lib/UI/Forms/Checkbox.svelte';
     import NeoDropdown from '$lib/UI/Forms/NeoDropdown.svelte';
+    import NeoTextArea from '$lib/UI/Forms/NeoTextArea.svelte';
+    import NeoFileUpload from '$lib/UI/Forms/NeoFileUpload.svelte';
     import { SearchSolid, UserSolid, EnvelopeSolid, EyeSolid, EyeSlashSolid } from 'flowbite-svelte-icons';
 
     let showPassword = $state(false);
@@ -322,6 +324,90 @@
             <Checkbox
                 label="Disabled Checkbox"
                 disabled
+                colorIndex={3}
+            />
+        </div>
+    </div>
+
+    <!-- Text Areas -->
+    <div class="mb-8">
+        <h3 class="mb-4 text-lg font-bold dark:text-white">Text Areas</h3>
+        <div class="grid gap-6 md:grid-cols-2">
+            <NeoTextArea
+                label="Basic Textarea"
+                placeholder="Enter your message..."
+                rows={4}
+            />
+
+            <NeoTextArea
+                label="With Helper"
+                placeholder="Write your bio..."
+                helper="Maximum 500 characters"
+                colorIndex={1}
+            />
+
+            <NeoTextArea
+                label="With Error"
+                value="Too short..."
+                error="Bio must be at least 50 characters long"
+                colorIndex={4}
+            />
+
+            <NeoTextArea
+                label="With Success"
+                value="Perfect length bio with good content..."
+                success="Bio looks great!"
+                colorIndex={2}
+            />
+
+            <NeoTextArea
+                label="Disabled Textarea"
+                value="This content cannot be edited"
+                disabled
+                colorIndex={3}
+            />
+        </div>
+    </div>
+
+    <!-- File Uploads -->
+    <div class="mb-8">
+        <h3 class="mb-4 text-lg font-bold dark:text-white">File Uploads</h3>
+        <div class="grid gap-6 md:grid-cols-2">
+            <NeoFileUpload
+                label="Basic Upload"
+                helper="Drag and drop or click to select"
+            />
+
+            <NeoFileUpload
+                label="Image Upload"
+                accept="image/*"
+                helper="Only images are allowed"
+                colorIndex={1}
+            />
+
+            <NeoFileUpload
+                label="Multiple Files"
+                multiple
+                helper="You can select multiple files"
+                colorIndex={2}
+            />
+
+            <NeoFileUpload
+                label="With Error"
+                error="Please upload a valid file"
+                colorIndex={4}
+            />
+
+            <NeoFileUpload
+                label="With Success"
+                success="File uploaded successfully!"
+                colorIndex={2}
+            />
+
+            <NeoFileUpload
+                label="Disabled Upload"
+                disabled
+                helper="You cannot upload files here"
                 colorIndex={3}
             />
         </div>
