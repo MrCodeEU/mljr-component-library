@@ -33,7 +33,7 @@ TODO: Add Git workflow to build npm package and publisch on main push
     - [x] Checkboxes
     - [x] Dropdown
     - [x] Text Area
-    - [ ] Color Picker
+    - [ ] Color Picker (search base comp and add styling etc like datepicker)
     - [ ] ...?
 - [X] Avatars
 - [x] Badges

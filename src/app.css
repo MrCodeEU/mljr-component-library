@@ -13,6 +13,23 @@
     --color-2: theme(colors.blue.400);
     --color-3: theme(colors.green.400);
     --color-4: theme(colors.pink.400);
+
+    /* Date picker custom properties */
+    --date-picker-background: theme(colors.white);
+    --date-picker-foreground: theme(colors.black);
+    --date-picker-highlight-border: theme(colors.black);
+    --date-picker-highlight-shadow: rgba(0, 0, 0, 0.1);
+    --date-picker-selected-color: theme(colors.black);
+    --date-picker-selected-background: theme(colors.yellow.300);
+}
+
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --date-picker-background: theme(colors.gray.800);
+    --date-picker-foreground: theme(colors.white);
+    --date-picker-selected-background: theme(colors.purple.700);
+  }
 }
 
 @layer components {
@@ -190,5 +207,18 @@
     @apply opacity-50 cursor-not-allowed 
     hover:translate-x-0 hover:translate-y-0 
     hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)];
+  }
+
+  .neo-brutalist-datepicker select {
+    @apply bg-transparent border-2 border-black rounded-none font-mono
+    shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]
+    hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]
+    focus:shadow-none
+    focus:outline-none
+    transition-all;
+  }
+
+  .neo-brutalist-datepicker select option {
+    @apply bg-white dark:bg-gray-800 font-mono;
   }
 }
