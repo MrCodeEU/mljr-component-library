@@ -4,17 +4,17 @@
 	import { type VariantProps, tv } from "tailwind-variants";
 
 	export const buttonVariants = tv({
-		base: "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-mono font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border-brutal border-foreground",
+		base: "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
 		variants: {
 			variant: {
-				default: "brutal-button bg-primary text-primary-foreground",
-				destructive: "brutal-button bg-destructive text-destructive-foreground",
-				outline: "brutal-card bg-background hover:bg-accent hover:text-accent-foreground",
-				secondary: "brutal-button bg-secondary text-secondary-foreground",
-				ghost: "brutal-button bg-background hover:bg-accent hover:text-accent-foreground",
-				link: "bg-primary text-foreground px-2 border-none no-underline hover:no-underline",
-				accent: "brutal-button bg-accent text-accent-foreground",
-				muted: "brutal-button bg-muted text-muted-foreground",
+				default: "clay-element clay-interactive bg-gradient-to-br from-primary to-primary/90 text-primary-foreground",
+				destructive: "clay-element clay-interactive bg-gradient-to-br from-destructive to-destructive/90 text-destructive-foreground",
+				outline: "clay-element clay-interactive bg-gradient-to-br from-background to-background/95 hover:bg-accent/10",
+				secondary: "clay-element clay-interactive bg-gradient-to-br from-secondary to-secondary/90 text-secondary-foreground",
+				ghost: "hover:bg-accent hover:text-accent-foreground",
+				link: "inline-flex items-center justify-center px-3 py-1 text-foreground bg-primary rounded-lg transition-all duration-200",
+				accent: "clay-element clay-interactive bg-gradient-to-br from-accent to-accent/90 text-accent-foreground",
+				muted: "clay-element clay-interactive bg-gradient-to-br from-muted to-muted/90 text-muted-foreground",
 			},
 			size: {
 				default: "h-10 px-6 py-2",

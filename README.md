@@ -19,10 +19,10 @@ TODO: Add Git workflow to build npm package and publisch on main push
 - [ ] ...
 
 # Elements
-- [ ] Cards
+- [x] Cards
 - [x] Buttons
 - [ ] Toggle
-- [ ] Tab Groups
+- [x] Tab Groups
 - [ ] Form Elements (Inputs, Files Uploads, Date Pickers etc)
     - [ ] Text Input
     - [ ] Range Slider (with dual handle support)
