@@ -7,24 +7,24 @@
 @layer base {
   :root {
     /* Neo Brutalist Light Theme */
-    --background: 60 30% 90%;  /* Darker cream color */
-    --foreground: 0 0% 10%;
+    --background: 45 40% 94%;  /* Warmer cream */
+    --foreground: 225 25% 20%;  /* Deeper black */
     
-    /* Primary - Vibrant Yellow */
-    --primary: 50 100% 50%;
-    --primary-foreground: 0 0% 10%;
+    /* Primary - Punchy Yellow */
+    --primary: 45 95% 75%;
+    --primary-foreground: 225 25% 20%;
     
-    /* Secondary - Punchy Red */
-    --secondary: 0 100% 65%;
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary - Vibrant Pink */
+    --secondary: 350 95% 82%;
+    --secondary-foreground: 225 25% 20%;
     
-    /* Accent - Cyan */
-    --accent: 180 100% 39%;
-    --accent-foreground: 0 0% 100%;
+    /* Accent - Electric Blue */
+    --accent: 195 85% 70%;
+    --accent-foreground: 225 25% 20%;
     
     /* Interface Colors */
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 210 30% 90%;
+    --muted-foreground: 215 25% 40%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 10%;
     --popover: 0 0% 100%;
@@ -33,9 +33,9 @@
     --input: 0 0% 100%;
     --ring: 50 100% 50%;
     
-    /* Destructive */
-    --destructive: 0 100% 65%;
-    --destructive-foreground: 0 0% 100%;
+    /* Destructive - Bright Red */
+    --destructive: 0 95% 82%;
+    --destructive-foreground: 225 25% 20%;
     
     /* Sidebar */
     --sidebar-background: 0 0% 96%;
@@ -57,24 +57,24 @@
 
   .dark {
     /* Neo Brutalist Dark Theme */
-    --background: 230 40% 12%;  /* Changed to deep navy blue */
-    --foreground: 0 0% 100%;
+    --background: 225 35% 15%;  /* Richer navy */
+    --foreground: 210 25% 98%;  /* Brighter white */
     
-    /* Primary - Royal Purple */
-    --primary: 270 100% 64%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary - Electric Purple */
+    --primary: 270 85% 75%;
+    --primary-foreground: 225 25% 20%;
     
-    /* Secondary - Orange */
-    --secondary: 30 100% 50%;
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary - Vibrant Peach */
+    --secondary: 25 90% 75%;
+    --secondary-foreground: 225 25% 20%;
     
-    /* Accent - Mint */
-    --accent: 165 100% 45%;
-    --accent-foreground: 0 0% 100%;
+    /* Accent - Electric Mint */
+    --accent: 165 85% 70%;
+    --accent-foreground: 225 25% 20%;
     
     /* Interface Colors */
-    --muted: 270 3% 12%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 225 30% 22%;
+    --muted-foreground: 210 25% 75%;
     --card: 270 3% 12%;
     --card-foreground: 0 0% 100%;
     --popover: 270 3% 12%;
@@ -83,9 +83,9 @@
     --input: 270 3% 12%;
     --ring: 270 100% 64%;
     
-    /* Destructive */
-    --destructive: 0 100% 65%;
-    --destructive-foreground: 0 0% 100%;
+    /* Destructive - Bright Red */
+    --destructive: 0 90% 75%;
+    --destructive-foreground: 225 25% 20%;
     
     /* Sidebar */
     --sidebar-background: 270 3% 12%;
