@@ -12,8 +12,8 @@ TODO: Add Git workflow to build npm package and publisch on main push
 - [ ] Footer
 - [ ] Login / Register
 - [ ] Login / Register Modals
-- [ ] Language Toggle (Using Paraglide)
-- [ ] Toast (Sonner!)
+- [X] Language Toggle (Using Paraglide)
+- [x] Toast (Timer? Visualisation?)
 - [ ] Skill Badges
 - [ ] Idea: A Forms Componet that is JSON Configurable?
 - [ ] ...

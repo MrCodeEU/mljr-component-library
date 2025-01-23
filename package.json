@@ -55,6 +55,7 @@
 		"publint": "^0.2.0",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
+		"svelte-sonner": "^0.3.28",
 		"svoast": "^3.0.3",
 		"tailwind-merge": "^2.6.0",
 		"tailwind-variants": "^0.3.1",

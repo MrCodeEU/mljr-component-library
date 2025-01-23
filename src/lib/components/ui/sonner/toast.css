@@ -1,0 +1,38 @@
+.toast {
+  transition: all 0.3s ease;
+  border: none !important;
+}
+
+.toast:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    var(--depth-large) var(--depth-large) calc(var(--depth-large) * 2) var(--shadow-color),
+    inset -2px -2px 4px var(--shadow-color),
+    inset 2px 2px 4px var(--highlight-color);
+}
+
+/* Toast variants */
+.toast[data-type="success"] {
+  background: linear-gradient(145deg, hsl(var(--success)), hsl(var(--success) / 0.9)) !important;
+  color: hsl(var(--success-foreground)) !important;
+}
+
+.toast[data-type="error"] {
+  background: linear-gradient(145deg, hsl(var(--destructive)), hsl(var(--destructive) / 0.9)) !important;
+  color: hsl(var(--destructive-foreground)) !important;
+}
+
+.toast[data-type="info"] {
+  background: linear-gradient(145deg, hsl(var(--info)), hsl(var(--info) / 0.9)) !important;
+  color: hsl(var(--info-foreground)) !important;
+}
+
+.toast[data-type="warning"] {
+  background: linear-gradient(145deg, hsl(var(--warning)), hsl(var(--warning) / 0.9)) !important;
+  color: hsl(var(--warning-foreground)) !important;
+}
+
+/* Default toast */
+.toast:not([data-type]) {
+  background: linear-gradient(145deg, hsl(var(--card)), hsl(var(--card) / 0.95)) !important;
+}

@@ -179,7 +179,7 @@
 @layer components {
   /* Base clay element without active state */
   .clay-element {
-    @apply relative rounded-[var(--border-radius)] transition-all duration-300;
+    @apply rounded-[var(--border-radius)] transition-all duration-300;
     background: linear-gradient(
       145deg,
       hsl(var(--card) / 1),

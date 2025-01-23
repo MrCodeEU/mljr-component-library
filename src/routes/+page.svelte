@@ -6,25 +6,13 @@
     import * as Tabs from "$lib/components/ui/tabs";
     import * as m from "$lib/paraglide/messages";
     import * as Navbar from "$lib/components/ui/navbar";
-    import { Separator as NavbarSeparator } from "$lib/components/ui/navbar";
     import DotsBackground from "$lib/components/ui/dots-background/dots-background.svelte";
+    import { toast } from "svelte-sonner";
+	import NavbarMljr from "$lib/prebuilts/navbar_mljr.svelte";
 </script>
 
-<Navbar.Root>
-    {#snippet brand()}
-    <Navbar.Brand>
-        <span class="text-2xl font-bold">🚀</span>
-        <span>Component Library</span>
-    </Navbar.Brand>
-    {/snippet}
-    <Navbar.Content>
-            <Button variant="ghost">Home</Button>
-            <Button variant="ghost">About</Button>
-            <Button variant="ghost">Contact</Button>
-            <NavbarSeparator class="hidden md:block" />
-            <Button>Sign Up</Button>
-    </Navbar.Content>
-</Navbar.Root>
+<NavbarMljr />
+
 <DotsBackground />
 
 <main class="container py-8 space-y-12 min-h-screen relative">
@@ -97,6 +85,65 @@
                                 <Button size="icon" variant="accent">×</Button>
                                 <Button size="icon" variant="destructive">÷</Button>
                             </div>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                <!-- Toast Section -->
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Toast Notifications</CardTitle>
+                        <CardDescription>Claymorphic toast notifications for various states</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <div class="flex flex-wrap gap-4">
+                            <Button 
+                                onclick={() => toast("Default notification")}
+                                variant="default"
+                            >
+                                Default Toast
+                            </Button>
+                            
+                            <Button 
+                                onclick={() => toast.success("Success notification", {
+                                    description: "Action completed successfully",
+                                    action: {
+                                        label: "Undo",
+                                        onClick: () => console.log("Undo clicked")
+                                    }
+                                })}
+                                variant="default"
+                            >
+                                Success Toast
+                            </Button>
+                            
+                            <Button 
+                                onclick={() => toast.error("Error notification", {
+                                    description: "Something went wrong"
+                                })}
+                                variant="destructive"
+                            >
+                                Error Toast
+                            </Button>
+                            
+                            <Button 
+                                onclick={() => toast.info("Information", {
+                                    description: "Here's some useful information",
+                                    duration: 5000
+                                })}
+                                variant="secondary"
+                            >
+                                Info Toast
+                            </Button>
+                            
+                            <Button 
+                                onclick={() => toast.warning("Warning notification", {
+                                    description: "Please proceed with caution"
+                                })}
+                                variant="outline"
+                            >
+                                Warning Toast
+                            </Button>
                         </div>
                     </CardContent>
                 </Card>
