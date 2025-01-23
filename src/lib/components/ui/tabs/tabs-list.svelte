@@ -12,7 +12,8 @@
 <TabsPrimitive.List
 	bind:ref
 	class={cn(
-		"clay-element inline-flex h-12 items-center justify-center gap-2 p-2",
+		"clay-element w-full flex flex-wrap h-auto min-h-[3rem]",
+		"items-center justify-start gap-2 p-2",
 		className
 	)}
 	{...restProps}

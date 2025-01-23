@@ -8,12 +8,12 @@ TODO: Add Git workflow to build npm package and publisch on main push
 
 
 # Components 
-- [ ] Navbar
+- [x] Navbar
 - [ ] Footer
 - [ ] Login / Register
 - [ ] Login / Register Modals
 - [ ] Language Toggle (Using Paraglide)
-- [ ] Toast
+- [ ] Toast (Sonner!)
 - [ ] Skill Badges
 - [ ] Idea: A Forms Componet that is JSON Configurable?
 - [ ] ...
@@ -21,7 +21,7 @@ TODO: Add Git workflow to build npm package and publisch on main push
 # Elements
 - [x] Cards
 - [x] Buttons
-- [ ] Toggle
+- [ ] Toggle (SWITCH)
 - [x] Tab Groups
 - [ ] Form Elements (Inputs, Files Uploads, Date Pickers etc)
     - [ ] Text Input

@@ -5,9 +5,29 @@
     import { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from "$lib/components/ui/card";
     import * as Tabs from "$lib/components/ui/tabs";
     import * as m from "$lib/paraglide/messages";
+    import * as Navbar from "$lib/components/ui/navbar";
+    import { Separator as NavbarSeparator } from "$lib/components/ui/navbar";
+    import DotsBackground from "$lib/components/ui/dots-background/dots-background.svelte";
 </script>
 
-<main class="container py-8 space-y-12 brutal-pattern min-h-screen">
+<Navbar.Root>
+    {#snippet brand()}
+    <Navbar.Brand>
+        <span class="text-2xl font-bold">🚀</span>
+        <span>Component Library</span>
+    </Navbar.Brand>
+    {/snippet}
+    <Navbar.Content>
+            <Button variant="ghost">Home</Button>
+            <Button variant="ghost">About</Button>
+            <Button variant="ghost">Contact</Button>
+            <NavbarSeparator class="hidden md:block" />
+            <Button>Sign Up</Button>
+    </Navbar.Content>
+</Navbar.Root>
+<DotsBackground />
+
+<main class="container py-8 space-y-12 min-h-screen relative">
     <h1 class="font-mono">{m.page_title()}</h1>
 
     <Card>
@@ -24,7 +44,7 @@
     </Card>
 
     <Tabs.Root value="basics" class="w-full">
-        <Tabs.List class="grid w-full grid-cols-5">
+        <Tabs.List>
             <Tabs.Trigger value="basics">Basics</Tabs.Trigger>
             <Tabs.Trigger value="forms">Forms</Tabs.Trigger>
             <Tabs.Trigger value="layout">Layout</Tabs.Trigger>
@@ -125,15 +145,50 @@
         </Tabs.Content>
 
         <Tabs.Content value="navigation" class="mt-6">
-            <Card>
-                <CardHeader>
-                    <CardTitle>Navigation Elements</CardTitle>
-                    <CardDescription>Navigation components and patterns</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <!-- Add your navigation components here -->
-                </CardContent>
-            </Card>
+            <div class="grid gap-6">
+                <!-- Navbar Example -->
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Navigation Bar</CardTitle>
+                        <CardDescription>Example of a navbar component with brand and navigation items</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <div class="grid gap-4">
+                            <!-- Default Navbar -->
+                            <Navbar.Root>
+                                {#snippet brand()}
+                                <Navbar.Brand>
+                                    <span class="text-2xl font-bold">🚀</span>
+                                    <span>BrandName</span>
+                                </Navbar.Brand>
+                                {/snippet}
+                                <Navbar.Content>
+                                    <Button variant="ghost">Home</Button>
+                                    <Button variant="ghost">About</Button>
+                                    <Button variant="ghost">Contact</Button>
+                                    <Button>Sign Up</Button>
+                                </Navbar.Content>
+                            </Navbar.Root>
+
+                            <!-- Alternative Style -->
+                            <Navbar.Root class="bg-secondary">
+                                {#snippet brand()}
+                                <Navbar.Brand>
+                                    <span class="text-2xl font-bold">🎨</span>
+                                    <span>ArtStyle</span>
+                                </Navbar.Brand>
+                                {/snippet}
+                                <Navbar.Content>
+                                    <Button variant="secondary">Gallery</Button>
+                                    <Button variant="secondary">Artists</Button>
+                                    <Button variant="secondary">Events</Button>
+                                    <Button variant="accent">Submit Art</Button>
+                                </Navbar.Content>
+                            </Navbar.Root>
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
         </Tabs.Content>
 
         <Tabs.Content value="showcase" class="mt-6">

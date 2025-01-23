@@ -191,7 +191,7 @@
       inset 2px 2px 4px var(--highlight-color);
   }
 
-  .clay-element:hover {
+  .clay-interactive:hover {
     transform: translateY(-3px);
     box-shadow: 
       var(--depth-large) var(--depth-large) calc(var(--depth-large) * 1.8) var(--shadow-color),
@@ -219,22 +219,6 @@
 
   .brutal-button {
     @apply clay-element clay-interactive px-6 py-3 font-medium;
-  }
-
-  /* Subtle pattern for the background */
-  .brutal-pattern {
-    background: linear-gradient(
-      145deg,
-      hsl(var(--background)),
-      hsl(var(--background) / 0.97)
-    );
-    background-image: 
-      radial-gradient(
-        circle at 1px 1px,
-        hsl(var(--muted)) 1px,
-        transparent 0
-      );
-    background-size: 24px 24px;
   }
 }
 
