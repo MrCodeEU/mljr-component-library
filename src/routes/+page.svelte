@@ -9,6 +9,7 @@
     import DotsBackground from "$lib/components/ui/dots-background/dots-background.svelte";
     import { toast } from "svelte-sonner";
 	import NavbarMljr from "$lib/prebuilts/navbar_mljr.svelte";
+    import FooterMljr from "$lib/prebuilts/footer_mljr.svelte";
 </script>
 
 <NavbarMljr />
@@ -310,3 +311,4 @@
         </Tabs.Content>
     </Tabs.Root>
 </main>
+<FooterMljr />

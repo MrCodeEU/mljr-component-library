@@ -231,20 +231,4 @@
   .font-mono {
     font-family: 'Space Mono', monospace;
   }
-
-  .shadow-brutal {
-    box-shadow: var(--brutal-shadow);
-  }
-  
-  .shadow-brutal-lg {
-    box-shadow: var(--brutal-shadow-lg);
-  }
-  
-  .shadow-brutal-xl {
-    box-shadow: var(--brutal-shadow-xl);
-  }
-  
-  .border-brutal {
-    border-width: var(--brutal-border-width);
-  }
 }
