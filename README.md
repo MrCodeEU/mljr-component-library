@@ -35,7 +35,7 @@ TODO: Add Git workflow to build npm package and publisch on main push
     - [ ] Text Area
     - [ ] Color Picker (search base comp and add styling etc like datepicker)
     - [ ] ...?
-- [ ] Avatars
+- [x] Avatars
 - [ ] Badges
 - [ ] Image Carousel
 - [ ] Progress Bars

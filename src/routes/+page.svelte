@@ -10,6 +10,7 @@
     import { toast } from "svelte-sonner";
 	import NavbarMljr from "$lib/prebuilts/navbar_mljr.svelte";
     import FooterMljr from "$lib/prebuilts/footer_mljr.svelte";
+    import * as Avatar from "$lib/components/ui/avatar";
 </script>
 
 <NavbarMljr />
@@ -304,6 +305,49 @@
                                     <h3 class="text-lg font-bold text-white">Info to Mint</h3>
                                     <p class="text-white/90">Another gradient example</p>
                                 </div>
+                            </div>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                <!-- Avatar Showcase -->
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Avatars</CardTitle>
+                        <CardDescription>Claymorphic avatar components with fallback support</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <div class="flex flex-wrap gap-8">
+                            <!-- Avatar with Image -->
+                            <div class="flex flex-col items-center gap-2">
+                                <Avatar.Root>
+                                    <Avatar.Image
+                                        src="https://github.com/shadcn.png"
+                                        alt="Example Avatar"
+                                    />
+                                    <Avatar.Fallback>CN</Avatar.Fallback>
+                                </Avatar.Root>
+                                <span class="text-sm text-muted-foreground">With Image</span>
+                            </div>
+
+                            <!-- Avatar with Fallback -->
+                            <div class="flex flex-col items-center gap-2">
+                                <Avatar.Root>
+                                    <Avatar.Fallback>ML</Avatar.Fallback>
+                                </Avatar.Root>
+                                <span class="text-sm text-muted-foreground">With Fallback</span>
+                            </div>
+
+                            <!-- Large Avatar -->
+                            <div class="flex flex-col items-center gap-2">
+                                <Avatar.Root class="size-16">
+                                    <Avatar.Image
+                                        src="https://github.com/shadcn.png"
+                                        alt="Large Avatar"
+                                    />
+                                    <Avatar.Fallback>LG</Avatar.Fallback>
+                                </Avatar.Root>
+                                <span class="text-sm text-muted-foreground">Large Size</span>
                             </div>
                         </div>
                     </CardContent>
