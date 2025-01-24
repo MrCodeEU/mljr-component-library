@@ -15,7 +15,8 @@
 <NavbarMljr />
 
 <DotsBackground />
-
+<div class="relative">
+    
 <main class="container py-8 space-y-12 min-h-screen relative">
     <h1 class="font-mono">{m.page_title()}</h1>
 
@@ -310,5 +311,10 @@
             </div>
         </Tabs.Content>
     </Tabs.Root>
+
+
 </main>
-<FooterMljr />
+<footer class="w-full bg-background">
+    <FooterMljr />
+</footer>
+</div>

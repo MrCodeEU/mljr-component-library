@@ -1,45 +1,91 @@
 <script lang="ts">
-    import * as Footer from "$lib/components/ui/footer";
-    import { Button } from "$lib/components/ui/button";
-    import { Card, CardHeader, CardContent } from "$lib/components/ui/card";
+    import { cn } from "$lib/utils.js";
+    import { Card, CardContent, CardHeader, CardTitle } from "$lib/components/ui/card";
+    let className = "";
+    export { className as class };
 </script>
 
-<Footer.Root>
-    {#snippet brand()}
-    <div class="clay-element text-sm bg-gradient-to-b from-pink-700 to-cyan-600 p-5">
-        © 2025 MLJR. All rights reserved.
-    </div>
-    {/snippet}
-    <Footer.Content>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-10/12 mx-auto">
-            <Card class="bg-accent bg-gradient-to-bl from-accent to-muted">
+<footer class={cn("clay-element mt-auto mx-4 mb-4 p-8", className)}>
+    <div class="container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Company Info Card -->
+            <Card class="clay-element" style="background: linear-gradient(145deg, hsl(var(--purple)), hsl(var(--pink)))">
                 <CardHeader>
-                    <h3 class="text-lg font-semibold">Company</h3>
+                    <CardTitle class="text-white">MLJR Components</CardTitle>
                 </CardHeader>
-                <CardContent class="flex flex-col gap-2">
-                    <Button variant="accent" class="w-full justify-center" href="/about">About</Button>
-                    <Button variant="accent" class="w-full justify-center" href="/careers">Careers</Button>
-                    <Button variant="accent" class="w-full justify-center" href="/contact">Contact</Button>
+                <CardContent>
+                    <p class="text-white/90">
+                        Beautiful claymorphic components for modern web applications.
+                    </p>
                 </CardContent>
             </Card>
-            <Card class="bg-primary bg-gradient-to-b from-primary to-muted">
+
+            <!-- Quick Links Card -->
+            <Card class="clay-element" style="background: linear-gradient(145deg, hsl(var(--accent)), hsl(var(--info)))">
                 <CardHeader>
-                    <h3 class="text-lg font-semibold">Legal</h3>
+                    <CardTitle class="text-white">Quick Links</CardTitle>
                 </CardHeader>
-                <CardContent class="flex flex-col gap-2">
-                    <Button variant="primary" class="w-full justify-center" href="/privacy">Privacy</Button>
-                    <Button variant="primary" class="w-full justify-center" href="/terms">Terms</Button>
+                <CardContent>
+                    <nav class="flex flex-col space-y-2">
+                        <a href="/docs" class="footer-link">Documentation</a>
+                        <a href="/components" class="footer-link">Components</a>
+                        <a href="/examples" class="footer-link">Examples</a>
+                    </nav>
                 </CardContent>
             </Card>
-            <Card class="bg-destructive bg-gradient-to-br from-destructive to-muted">
+
+            <!-- Social Links Card -->
+            <Card class="clay-element" style="background: linear-gradient(145deg, hsl(var(--mint)), hsl(var(--success)))">
                 <CardHeader>
-                    <h3 class="text-lg font-semibold">Connect</h3>
+                    <CardTitle class="text-white">Connect</CardTitle>
                 </CardHeader>
-                <CardContent class="flex flex-col gap-2">
-                    <Button variant="destructive" class="w-full justify-center" href="https://twitter.com/mljr">Twitter</Button>
-                    <Button variant="destructive" class="w-full justify-center" href="https://www.linkedin.com/company/mljr">LinkedIn</Button>
+                <CardContent>
+                    <nav class="flex flex-col space-y-2">
+                        <a href="https://github.com/yourusername" class="footer-link">GitHub</a>
+                        <a href="https://twitter.com/yourusername" class="footer-link">Twitter</a>
+                        <a href="https://discord.gg/yourinvite" class="footer-link">Discord</a>
+                    </nav>
                 </CardContent>
             </Card>
         </div>
-    </Footer.Content>
-</Footer.Root>
+
+        <div class="mt-8 pt-8 border-t border-muted">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-muted-foreground">
+                    © {new Date().getFullYear()} MLJR Components. All rights reserved.
+                </p>
+                <nav class="flex gap-4">
+                    <a href="/privacy" class="text-sm">Privacy</a>
+                    <a href="/terms" class="text-sm">Terms</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+    /* Enhanced footer link styling */
+    .footer-link {
+        @apply text-white/90 hover:text-white transition-colors;
+        background: rgba(58, 58, 58, 0.322);
+        box-shadow: 
+            inset -1px -1px 1px rgba(0, 0, 0, 0.2),
+            inset 1px 1px 1px rgba(255, 255, 255, 0.2);
+    }
+
+    .footer-link:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-1px);
+    }
+
+    a:not(.footer-link) {
+        @apply text-foreground/80 hover:text-foreground transition-colors;
+        background: none;
+        box-shadow: none;
+    }
+
+    a:not(.footer-link):hover {
+        transform: none;
+        box-shadow: none;
+    }
+</style>

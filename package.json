@@ -1,7 +1,7 @@
 {
 	"name": "mljr-shared-component-library",
 	"license": "MIT",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "paraglide-js compile --project ./project.inlang --outdir ./src\\paraglide && vite build && npm run package",

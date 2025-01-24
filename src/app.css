@@ -191,6 +191,16 @@
       inset 2px 2px 4px var(--highlight-color);
   }
 
+  .clay-element [data-variant="ghost"] {
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.2s ease;
+  }
+
+  .clay-element [data-variant="ghost"]:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
   .clay-interactive:hover {
     transform: translateY(-3px);
     box-shadow: 
